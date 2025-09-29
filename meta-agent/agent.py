@@ -663,6 +663,7 @@ def render_human_summary(plan: Dict[str, Any]) -> str:
 agent = Agent(
     name="shoplyft_agent",
     system_prompt="prompt.md",  # Load from markdown file
+    model="co/o4-mini",  # Use ConnectOnion model
     tools=[
         # Core data tools
         fetch_prices,
