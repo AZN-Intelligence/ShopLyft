@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple test script for ShopLyft AI Agent
+Simple test for ShopLyft AI Agent using ConnectOnion
 """
 
 import sys
@@ -9,22 +9,21 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'meta-agent'))
 
 from agent import agent
 
-def test_agent():
-    """Test the ShopLyft agent with a simple shopping list."""
+def test_basic_functionality():
+    """Test basic agent functionality with ConnectOnion."""
     
-    print("🧪 Testing ShopLyft AI Agent...")
-    print("=" * 50)
+    print("🧪 Testing ShopLyft AI Agent with ConnectOnion...")
+    print("=" * 60)
     
     # Test input
     test_input = """
     Shopping list: milk, bread, eggs
     Location: -33.871, 151.206 (Sydney CBD)
-    Preferences: substitutions ok, max_stores 3, weight time 0.2 cost 0.8
     """
     
     print(f"Input: {test_input.strip()}")
-    print("\nProcessing...")
-    print("-" * 50)
+    print("\nProcessing with ConnectOnion...")
+    print("-" * 60)
     
     try:
         response = agent.input(test_input)
@@ -37,4 +36,4 @@ def test_agent():
         traceback.print_exc()
 
 if __name__ == "__main__":
-    test_agent()
+    test_basic_functionality()
