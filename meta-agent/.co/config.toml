@@ -1,0 +1,19 @@
+[project]
+name = "meta-agent"
+created = "2025-09-29T21:44:16.303951"
+framework_version = "0.0.7"
+
+[cli]
+version = "1.0.0"
+command = "co init"
+template = "custom"
+
+[agent]
+address = "0x9475b4974d7ea1949ad76ac0b28516bd0e568a738b633920af7c44540d86c7cf"
+short_address = "0x9475...c7cf"
+email = "0x9475b497@mail.openonion.ai"
+email_active = false
+created_at = "2025-09-29T21:44:16.303993"
+algorithm = "ed25519"
+default_model = "gpt-4o-mini"
+max_iterations = 10

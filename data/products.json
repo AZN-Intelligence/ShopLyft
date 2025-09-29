@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "canonical_id": "milk-fullcream-2l",
+      "canonical_name": "Milk Full Cream 2L",
+      "aliases": ["milk 2l", "2 litre milk", "full cream milk", "milk"]
+    },
+    {
+      "canonical_id": "bread-white-sliced",
+      "canonical_name": "Bread White Sliced",
+      "aliases": ["bread", "white bread", "sliced bread", "loaf"]
+    },
+    {
+      "canonical_id": "eggs-12pk",
+      "canonical_name": "Eggs 12 Pack",
+      "aliases": ["eggs", "12 eggs", "dozen eggs", "free range eggs"]
+    },
+    {
+      "canonical_id": "bananas-per-kg",
+      "canonical_name": "Bananas per kg",
+      "aliases": ["bananas", "banana", "fresh bananas"]
+    },
+    {
+      "canonical_id": "pasta-500g",
+      "canonical_name": "Pasta 500g",
+      "aliases": ["pasta", "spaghetti", "500g pasta", "penne"]
+    },
+    {
+      "canonical_id": "tomato-sauce-700g",
+      "canonical_name": "Tomato Sauce 700g",
+      "aliases": ["tomato sauce", "pasta sauce", "marinara", "700g sauce"]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "stores": [
+    {
+      "store_id": "woolworths:nsw:1234",
+      "retailer_id": "woolworths",
+      "name": "Woolworths Town Hall",
+      "address": "456 George Street, Sydney NSW 2000",
+      "location": { "lat": -33.871, "lng": 151.206 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "coles:nsw:5678",
+      "retailer_id": "coles",
+      "name": "Coles Central",
+      "address": "789 Pitt Street, Sydney NSW 2000",
+      "location": { "lat": -33.875, "lng": 151.210 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "aldi:nsw:9012",
+      "retailer_id": "aldi",
+      "name": "ALDI Sydney Central",
+      "address": "321 Castlereagh Street, Sydney NSW 2000",
+      "location": { "lat": -33.873, "lng": 151.208 },
+      "opening_hours": [
+        { "day": "Mon", "open": "08:00", "close": "21:00" },
+        { "day": "Tue", "open": "08:00", "close": "21:00" },
+        { "day": "Wed", "open": "08:00", "close": "21:00" },
+        { "day": "Thu", "open": "08:00", "close": "21:00" },
+        { "day": "Fri", "open": "08:00", "close": "21:00" },
+        { "day": "Sat", "open": "08:00", "close": "21:00" },
+        { "day": "Sun", "open": "08:00", "close": "21:00" }
+      ]
+    }
+  ]
+}

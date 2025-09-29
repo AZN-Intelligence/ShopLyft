@@ -1,0 +1,76 @@
+{
+  "prices": [
+    {
+      "retailer_product_id": "woolworths:milk:fc-2l-0001",
+      "price": 3.60
+    },
+    {
+      "retailer_product_id": "coles:milk:fc-2l-0001",
+      "price": 3.40
+    },
+    {
+      "retailer_product_id": "aldi:milk:fc-2l-0001",
+      "price": 2.95
+    },
+    {
+      "retailer_product_id": "woolworths:bread:wht-slc-0001",
+      "price": 2.50
+    },
+    {
+      "retailer_product_id": "coles:bread:wht-slc-0001",
+      "price": 2.30
+    },
+    {
+      "retailer_product_id": "aldi:bread:wht-slc-0001",
+      "price": 1.95
+    },
+    {
+      "retailer_product_id": "woolworths:eggs:12pk-0001",
+      "price": 5.50
+    },
+    {
+      "retailer_product_id": "coles:eggs:12pk-0001",
+      "price": 5.20
+    },
+    {
+      "retailer_product_id": "aldi:eggs:12pk-0001",
+      "price": 4.95
+    },
+    {
+      "retailer_product_id": "woolworths:bananas:per-kg-0001",
+      "price": 4.50
+    },
+    {
+      "retailer_product_id": "coles:bananas:per-kg-0001",
+      "price": 4.20
+    },
+    {
+      "retailer_product_id": "aldi:bananas:per-kg-0001",
+      "price": 3.95
+    },
+    {
+      "retailer_product_id": "woolworths:pasta:500g-0001",
+      "price": 2.20
+    },
+    {
+      "retailer_product_id": "coles:pasta:500g-0001",
+      "price": 2.00
+    },
+    {
+      "retailer_product_id": "aldi:pasta:500g-0001",
+      "price": 1.50
+    },
+    {
+      "retailer_product_id": "woolworths:sauce:tom-700g-0001",
+      "price": 3.50
+    },
+    {
+      "retailer_product_id": "coles:sauce:tom-700g-0001",
+      "price": 3.20
+    },
+    {
+      "retailer_product_id": "aldi:sauce:tom-700g-0001",
+      "price": 2.95
+    }
+  ]
+}

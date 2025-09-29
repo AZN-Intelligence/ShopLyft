@@ -1,0 +1,19 @@
+{
+  "retailers": [
+    {
+      "retailer_id": "woolworths",
+      "display_name": "Woolworths",
+      "click_collect": { "min_spend": 50.0, "currency": "AUD" }
+    },
+    {
+      "retailer_id": "coles",
+      "display_name": "Coles",
+      "click_collect": { "min_spend": 30.0, "currency": "AUD" }
+    },
+    {
+      "retailer_id": "aldi",
+      "display_name": "ALDI",
+      "click_collect": { "min_spend": 0.0, "currency": "AUD" }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "retailer_products": [
+    {
+      "retailer_product_id": "woolworths:milk:fc-2l-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "milk-fullcream-2l",
+      "name": "Woolworths Full Cream Milk 2L"
+    },
+    {
+      "retailer_product_id": "coles:milk:fc-2l-0001",
+      "retailer_id": "coles",
+      "canonical_id": "milk-fullcream-2l",
+      "name": "Coles Full Cream Milk 2L"
+    },
+    {
+      "retailer_product_id": "aldi:milk:fc-2l-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "milk-fullcream-2l",
+      "name": "ALDI Full Cream Milk 2L"
+    },
+    {
+      "retailer_product_id": "woolworths:bread:wht-slc-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "bread-white-sliced",
+      "name": "Woolworths White Sliced Bread"
+    },
+    {
+      "retailer_product_id": "coles:bread:wht-slc-0001",
+      "retailer_id": "coles",
+      "canonical_id": "bread-white-sliced",
+      "name": "Coles White Sliced Bread"
+    },
+    {
+      "retailer_product_id": "aldi:bread:wht-slc-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "bread-white-sliced",
+      "name": "ALDI White Sliced Bread"
+    },
+    {
+      "retailer_product_id": "woolworths:eggs:12pk-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "eggs-12pk",
+      "name": "Woolworths Free Range Eggs 12 Pack"
+    },
+    {
+      "retailer_product_id": "coles:eggs:12pk-0001",
+      "retailer_id": "coles",
+      "canonical_id": "eggs-12pk",
+      "name": "Coles Free Range Eggs 12 Pack"
+    },
+    {
+      "retailer_product_id": "aldi:eggs:12pk-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "eggs-12pk",
+      "name": "ALDI Free Range Eggs 12 Pack"
+    },
+    {
+      "retailer_product_id": "woolworths:bananas:per-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "bananas-per-kg",
+      "name": "Woolworths Bananas per kg"
+    },
+    {
+      "retailer_product_id": "coles:bananas:per-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "bananas-per-kg",
+      "name": "Coles Bananas per kg"
+    },
+    {
+      "retailer_product_id": "aldi:bananas:per-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "bananas-per-kg",
+      "name": "ALDI Bananas per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:pasta:500g-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "pasta-500g",
+      "name": "Woolworths Penne Pasta 500g"
+    },
+    {
+      "retailer_product_id": "coles:pasta:500g-0001",
+      "retailer_id": "coles",
+      "canonical_id": "pasta-500g",
+      "name": "Coles Penne Pasta 500g"
+    },
+    {
+      "retailer_product_id": "aldi:pasta:500g-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "pasta-500g",
+      "name": "ALDI Penne Pasta 500g"
+    },
+    {
+      "retailer_product_id": "woolworths:sauce:tom-700g-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "tomato-sauce-700g",
+      "name": "Woolworths Tomato Pasta Sauce 700g"
+    },
+    {
+      "retailer_product_id": "coles:sauce:tom-700g-0001",
+      "retailer_id": "coles",
+      "canonical_id": "tomato-sauce-700g",
+      "name": "Coles Tomato Pasta Sauce 700g"
+    },
+    {
+      "retailer_product_id": "aldi:sauce:tom-700g-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "tomato-sauce-700g",
+      "name": "ALDI Tomato Pasta Sauce 700g"
+    }
+  ]
+}
