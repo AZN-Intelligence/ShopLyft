@@ -24,6 +24,92 @@ def save_json_data(filename: str, data: Dict) -> str:
         json.dump(data, f, indent=2)
     return f"Data saved to {filename}"
 
+def parse_location(location_input: str) -> Dict[str, float]:
+    """Parse location input (coordinates or English names) to lat/lng coordinates."""
+    location_input = location_input.strip().lower()
+    
+    # First, try to parse as coordinates
+    try:
+        # Handle formats like "-33.871, 151.206" or "lat: -33.871, lng: 151.206"
+        import re
+        coord_pattern = r'-?\d+\.?\d*'
+        coords = re.findall(coord_pattern, location_input)
+        if len(coords) >= 2:
+            lat = float(coords[0])
+            lng = float(coords[1])
+            return {"lat": lat, "lng": lng}
+    except (ValueError, IndexError):
+        pass
+    
+    # Load stores data to match against actual store locations
+    stores_data = load_json_data("stores.json")
+    
+    # Build location map from actual stores data
+    location_map = {}
+    for store in stores_data.get("stores", []):
+        suburb = store.get("suburb", "").lower()
+        name = store.get("name", "").lower()
+        location = store.get("location", {})
+        
+        if suburb and location:
+            location_map[suburb] = location
+        
+        # Add store name variations
+        if "woolworths" in name:
+            if "town hall" in name:
+                location_map["sydney cbd"] = location
+                location_map["sydney"] = location
+                location_map["sydney central"] = location
+                location_map["town hall"] = location
+            elif "bondi junction" in name:
+                location_map["bondi junction"] = location
+                location_map["bondi"] = location
+            elif "pyrmont" in name:
+                location_map["pyrmont"] = location
+            elif "newtown" in name:
+                location_map["newtown"] = location
+            elif "double bay" in name:
+                location_map["double bay"] = location
+        
+        elif "coles" in name:
+            if "central" in name:
+                location_map["sydney cbd"] = location
+                location_map["sydney central"] = location
+            elif "bondi junction" in name:
+                location_map["bondi junction"] = location
+                location_map["bondi"] = location
+            elif "darlinghurst" in name:
+                location_map["darlinghurst"] = location
+            elif "surry hills" in name:
+                location_map["surry hills"] = location
+            elif "glebe" in name:
+                location_map["glebe"] = location
+        
+        elif "aldi" in name:
+            if "sydney central" in name:
+                location_map["sydney cbd"] = location
+                location_map["sydney central"] = location
+            elif "alexandria" in name:
+                location_map["alexandria"] = location
+            elif "waterloo" in name:
+                location_map["waterloo"] = location
+            elif "leichhardt" in name:
+                location_map["leichhardt"] = location
+            elif "mascot" in name:
+                location_map["mascot"] = location
+    
+    # Try exact match first
+    if location_input in location_map:
+        return location_map[location_input]
+    
+    # Try partial matches
+    for known_location, coords in location_map.items():
+        if location_input in known_location or known_location in location_input:
+            return coords
+    
+    # Default to Sydney CBD (Woolworths Town Hall coordinates)
+    return {"lat": -33.871, "lng": 151.206}
+
 # Core Agent Tools
 def fetch_prices(items: List[str], stores: List[str], location: Dict[str, float]) -> str:
     """Fetch prices for items across specified stores."""
@@ -150,6 +236,63 @@ def log_event(event: str) -> str:
     log_entry = f"[{timestamp}] {event}"
     print(log_entry)  # Simple console logging
     return f"Event logged: {event}"
+
+def validate_store_names(store_names: List[str]) -> str:
+    """Validate that store names exist in the mock data."""
+    stores_data = load_json_data("stores.json")
+    valid_stores = []
+    invalid_stores = []
+    
+    for store_name in store_names:
+        found = False
+        for store in stores_data.get("stores", []):
+            if store_name.lower() in store["name"].lower() or store["name"].lower() in store_name.lower():
+                valid_stores.append(store["name"])
+                found = True
+                break
+        
+        if not found:
+            invalid_stores.append(store_name)
+    
+    result = f"Valid stores: {valid_stores}"
+    if invalid_stores:
+        result += f"\nINVALID stores (not in mock data): {invalid_stores}"
+        result += "\nAvailable stores: Woolworths (Town Hall, Bondi Junction, Pyrmont, Newtown, Double Bay), Coles (Central, Bondi Junction, Darlinghurst, Surry Hills, Glebe), ALDI (Sydney Central, Alexandria, Waterloo, Leichhardt, Mascot)"
+    
+    return result
+
+def get_available_stores() -> str:
+    """Get the complete list of available stores from the mock data."""
+    stores_data = load_json_data("stores.json")
+    
+    stores_by_retailer = {
+        "Woolworths": [],
+        "Coles": [],
+        "ALDI": []
+    }
+    
+    for store in stores_data.get("stores", []):
+        retailer_id = store["retailer_id"]
+        # Map retailer IDs to proper display names
+        if retailer_id == "woolworths":
+            retailer = "Woolworths"
+        elif retailer_id == "coles":
+            retailer = "Coles"
+        elif retailer_id == "aldi":
+            retailer = "ALDI"
+        else:
+            retailer = retailer_id.title()
+        
+        store_name = store["name"]
+        stores_by_retailer[retailer].append(store_name)
+    
+    result = "Available stores in mock data:\n"
+    for retailer, stores in stores_by_retailer.items():
+        result += f"- {retailer}: {', '.join(stores)}\n"
+    
+    result += "\nIMPORTANT: You must ONLY use these exact store names. Do not invent or modify store names."
+    
+    return result
 
 # Core Planning Functions
 def normalize_shopping_list(raw_items: List[str]) -> List[Dict[str, Any]]:
@@ -665,6 +808,8 @@ agent = Agent(
     system_prompt="prompt.md",  # Load from markdown file
     model="co/o4-mini",  # Use ConnectOnion model
     tools=[
+        # Location parsing
+        parse_location,
         # Core data tools
         fetch_prices,
         store_locator, 
@@ -673,6 +818,9 @@ agent = Agent(
         cart_bridge,
         persist_plan,
         log_event,
+        # Data validation
+        validate_store_names,
+        get_available_stores,
         # Core planning functions
         normalize_shopping_list,
         match_candidates,
@@ -698,7 +846,7 @@ agent = Agent(
 if __name__ == "__main__":
     print("🛒 ShopLyft AI Agent Ready!")
     print("Enter a shopping list and location to get an optimized grocery plan.")
-    print("Example: 'Shopping list: milk, bread, eggs. Location: -33.871, 151.206'")
+    print("Example: 'Shopping list: milk, bread, eggs. Location: Sydney CBD'")
     print("Type 'quit' to exit.\n")
     
     while True:
