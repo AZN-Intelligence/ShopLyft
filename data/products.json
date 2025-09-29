@@ -3,32 +3,227 @@
     {
       "canonical_id": "milk-fullcream-2l",
       "canonical_name": "Milk Full Cream 2L",
+      "category": "dairy",
+      "unit_type": "volume",
+      "unit_size": 2.0,
+      "unit_measure": "L",
       "aliases": ["milk 2l", "2 litre milk", "full cream milk", "milk"]
+    },
+    {
+      "canonical_id": "milk-fullcream-1l",
+      "canonical_name": "Milk Full Cream 1L",
+      "category": "dairy",
+      "unit_type": "volume",
+      "unit_size": 1.0,
+      "unit_measure": "L",
+      "aliases": ["milk 1l", "1 litre milk", "milk small"]
+    },
+    {
+      "canonical_id": "milk-fullcream-3l",
+      "canonical_name": "Milk Full Cream 3L",
+      "category": "dairy",
+      "unit_type": "volume",
+      "unit_size": 3.0,
+      "unit_measure": "L",
+      "aliases": ["milk 3l", "3 litre milk", "milk large", "family milk"]
     },
     {
       "canonical_id": "bread-white-sliced",
       "canonical_name": "Bread White Sliced",
+      "category": "bakery",
+      "unit_type": "weight",
+      "unit_size": 0.7,
+      "unit_measure": "kg",
       "aliases": ["bread", "white bread", "sliced bread", "loaf"]
+    },
+    {
+      "canonical_id": "bread-wholemeal-sliced",
+      "canonical_name": "Bread Wholemeal Sliced",
+      "category": "bakery",
+      "unit_type": "weight",
+      "unit_size": 0.75,
+      "unit_measure": "kg",
+      "aliases": ["wholemeal bread", "brown bread", "whole wheat bread"]
     },
     {
       "canonical_id": "eggs-12pk",
       "canonical_name": "Eggs 12 Pack",
+      "category": "dairy",
+      "unit_type": "count",
+      "unit_size": 12,
+      "unit_measure": "each",
       "aliases": ["eggs", "12 eggs", "dozen eggs", "free range eggs"]
+    },
+    {
+      "canonical_id": "eggs-18pk",
+      "canonical_name": "Eggs 18 Pack",
+      "category": "dairy",
+      "unit_type": "count",
+      "unit_size": 18,
+      "unit_measure": "each",
+      "aliases": ["18 eggs", "large eggs", "family eggs"]
     },
     {
       "canonical_id": "bananas-per-kg",
       "canonical_name": "Bananas per kg",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
       "aliases": ["bananas", "banana", "fresh bananas"]
+    },
+    {
+      "canonical_id": "apples-per-kg",
+      "canonical_name": "Apples per kg",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["apples", "apple", "fresh apples", "red apples", "green apples"]
+    },
+    {
+      "canonical_id": "tomatoes-per-kg",
+      "canonical_name": "Tomatoes per kg",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["tomatoes", "tomato", "fresh tomatoes"]
     },
     {
       "canonical_id": "pasta-500g",
       "canonical_name": "Pasta 500g",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 0.5,
+      "unit_measure": "kg",
       "aliases": ["pasta", "spaghetti", "500g pasta", "penne"]
+    },
+    {
+      "canonical_id": "pasta-1kg",
+      "canonical_name": "Pasta 1kg",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["pasta 1kg", "bulk pasta", "family pasta"]
     },
     {
       "canonical_id": "tomato-sauce-700g",
       "canonical_name": "Tomato Sauce 700g",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 0.7,
+      "unit_measure": "kg",
       "aliases": ["tomato sauce", "pasta sauce", "marinara", "700g sauce"]
+    },
+    {
+      "canonical_id": "tomato-sauce-400g",
+      "canonical_name": "Tomato Sauce 400g",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 0.4,
+      "unit_measure": "kg",
+      "aliases": ["tomato sauce small", "400g sauce", "sauce can"]
+    },
+    {
+      "canonical_id": "rice-2kg",
+      "canonical_name": "Rice 2kg",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 2.0,
+      "unit_measure": "kg",
+      "aliases": ["rice", "white rice", "2kg rice", "jasmine rice"]
+    },
+    {
+      "canonical_id": "chicken-breast-per-kg",
+      "canonical_name": "Chicken Breast per kg",
+      "category": "meat",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["chicken breast", "chicken", "fresh chicken"]
+    },
+    {
+      "canonical_id": "mince-beef-per-kg",
+      "canonical_name": "Beef Mince per kg",
+      "category": "meat",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["beef mince", "mince", "ground beef"]
+    },
+    {
+      "canonical_id": "cheese-cheddar-250g",
+      "canonical_name": "Cheddar Cheese 250g",
+      "category": "dairy",
+      "unit_type": "weight",
+      "unit_size": 0.25,
+      "unit_measure": "kg",
+      "aliases": ["cheddar cheese", "cheese", "tasty cheese", "250g cheese"]
+    },
+    {
+      "canonical_id": "yogurt-1kg",
+      "canonical_name": "Greek Yogurt 1kg",
+      "category": "dairy",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["yogurt", "greek yogurt", "natural yogurt", "1kg yogurt"]
+    },
+    {
+      "canonical_id": "cereal-500g",
+      "canonical_name": "Breakfast Cereal 500g",
+      "category": "pantry",
+      "unit_type": "weight",
+      "unit_size": 0.5,
+      "unit_measure": "kg",
+      "aliases": ["cereal", "breakfast cereal", "cornflakes", "500g cereal"]
+    },
+    {
+      "canonical_id": "olive-oil-500ml",
+      "canonical_name": "Olive Oil 500ml",
+      "category": "pantry",
+      "unit_type": "volume",
+      "unit_size": 0.5,
+      "unit_measure": "L",
+      "aliases": ["olive oil", "cooking oil", "500ml oil", "extra virgin olive oil"]
+    },
+    {
+      "canonical_id": "onions-per-kg",
+      "canonical_name": "Onions per kg",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["onions", "onion", "brown onions", "cooking onions"]
+    },
+    {
+      "canonical_id": "potatoes-2kg",
+      "canonical_name": "Potatoes 2kg bag",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 2.0,
+      "unit_measure": "kg",
+      "aliases": ["potatoes", "potato", "2kg potatoes", "washed potatoes"]
+    },
+    {
+      "canonical_id": "carrots-1kg",
+      "canonical_name": "Carrots 1kg bag",
+      "category": "fresh-produce",
+      "unit_type": "weight",
+      "unit_size": 1.0,
+      "unit_measure": "kg",
+      "aliases": ["carrots", "carrot", "1kg carrots", "fresh carrots"]
+    },
+    {
+      "canonical_id": "orange-juice-2l",
+      "canonical_name": "Orange Juice 2L",
+      "category": "beverages",
+      "unit_type": "volume",
+      "unit_size": 2.0,
+      "unit_measure": "L",
+      "aliases": ["orange juice", "oj", "2l juice", "fresh orange juice"]
     }
   ]
 }

@@ -5,7 +5,81 @@
       "retailer_id": "woolworths",
       "name": "Woolworths Town Hall",
       "address": "456 George Street, Sydney NSW 2000",
+      "suburb": "Sydney",
+      "postcode": "2000",
       "location": { "lat": -33.871, "lng": 151.206 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "woolworths:nsw:1235",
+      "retailer_id": "woolworths",
+      "name": "Woolworths Bondi Junction",
+      "address": "500 Oxford Street, Bondi Junction NSW 2022",
+      "suburb": "Bondi Junction",
+      "postcode": "2022",
+      "location": { "lat": -33.891, "lng": 151.249 },
+      "opening_hours": [
+        { "day": "Mon", "open": "06:00", "close": "23:00" },
+        { "day": "Tue", "open": "06:00", "close": "23:00" },
+        { "day": "Wed", "open": "06:00", "close": "23:00" },
+        { "day": "Thu", "open": "06:00", "close": "23:00" },
+        { "day": "Fri", "open": "06:00", "close": "23:00" },
+        { "day": "Sat", "open": "06:00", "close": "23:00" },
+        { "day": "Sun", "open": "06:00", "close": "23:00" }
+      ]
+    },
+    {
+      "store_id": "woolworths:nsw:1236",
+      "retailer_id": "woolworths",
+      "name": "Woolworths Pyrmont",
+      "address": "2 Murray Street, Pyrmont NSW 2009",
+      "suburb": "Pyrmont",
+      "postcode": "2009",
+      "location": { "lat": -33.869, "lng": 151.195 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "woolworths:nsw:1237",
+      "retailer_id": "woolworths",
+      "name": "Woolworths Newtown",
+      "address": "255 King Street, Newtown NSW 2042",
+      "suburb": "Newtown",
+      "postcode": "2042",
+      "location": { "lat": -33.898, "lng": 151.179 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "woolworths:nsw:1238",
+      "retailer_id": "woolworths",
+      "name": "Woolworths Double Bay",
+      "address": "181 New South Head Road, Double Bay NSW 2028",
+      "suburb": "Double Bay",
+      "postcode": "2028",
+      "location": { "lat": -33.877, "lng": 151.240 },
       "opening_hours": [
         { "day": "Mon", "open": "07:00", "close": "22:00" },
         { "day": "Tue", "open": "07:00", "close": "22:00" },
@@ -21,7 +95,81 @@
       "retailer_id": "coles",
       "name": "Coles Central",
       "address": "789 Pitt Street, Sydney NSW 2000",
+      "suburb": "Sydney",
+      "postcode": "2000",
       "location": { "lat": -33.875, "lng": 151.210 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "coles:nsw:5679",
+      "retailer_id": "coles",
+      "name": "Coles Bondi Junction",
+      "address": "Westfield Bondi Junction, 500 Oxford Street, Bondi Junction NSW 2022",
+      "suburb": "Bondi Junction",
+      "postcode": "2022",
+      "location": { "lat": -33.892, "lng": 151.248 },
+      "opening_hours": [
+        { "day": "Mon", "open": "06:00", "close": "23:00" },
+        { "day": "Tue", "open": "06:00", "close": "23:00" },
+        { "day": "Wed", "open": "06:00", "close": "23:00" },
+        { "day": "Thu", "open": "06:00", "close": "23:00" },
+        { "day": "Fri", "open": "06:00", "close": "23:00" },
+        { "day": "Sat", "open": "06:00", "close": "23:00" },
+        { "day": "Sun", "open": "06:00", "close": "23:00" }
+      ]
+    },
+    {
+      "store_id": "coles:nsw:5680",
+      "retailer_id": "coles",
+      "name": "Coles Darlinghurst",
+      "address": "234 Oxford Street, Darlinghurst NSW 2010",
+      "suburb": "Darlinghurst",
+      "postcode": "2010",
+      "location": { "lat": -33.881, "lng": 151.221 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "23:00" },
+        { "day": "Tue", "open": "07:00", "close": "23:00" },
+        { "day": "Wed", "open": "07:00", "close": "23:00" },
+        { "day": "Thu", "open": "07:00", "close": "23:00" },
+        { "day": "Fri", "open": "07:00", "close": "23:00" },
+        { "day": "Sat", "open": "07:00", "close": "23:00" },
+        { "day": "Sun", "open": "07:00", "close": "23:00" }
+      ]
+    },
+    {
+      "store_id": "coles:nsw:5681",
+      "retailer_id": "coles",
+      "name": "Coles Surry Hills",
+      "address": "115 Crown Street, Surry Hills NSW 2010",
+      "suburb": "Surry Hills",
+      "postcode": "2010",
+      "location": { "lat": -33.888, "lng": 151.213 },
+      "opening_hours": [
+        { "day": "Mon", "open": "07:00", "close": "22:00" },
+        { "day": "Tue", "open": "07:00", "close": "22:00" },
+        { "day": "Wed", "open": "07:00", "close": "22:00" },
+        { "day": "Thu", "open": "07:00", "close": "22:00" },
+        { "day": "Fri", "open": "07:00", "close": "22:00" },
+        { "day": "Sat", "open": "07:00", "close": "22:00" },
+        { "day": "Sun", "open": "07:00", "close": "22:00" }
+      ]
+    },
+    {
+      "store_id": "coles:nsw:5682",
+      "retailer_id": "coles",
+      "name": "Coles Glebe",
+      "address": "194 Glebe Point Road, Glebe NSW 2037",
+      "suburb": "Glebe",
+      "postcode": "2037",
+      "location": { "lat": -33.879, "lng": 151.186 },
       "opening_hours": [
         { "day": "Mon", "open": "07:00", "close": "22:00" },
         { "day": "Tue", "open": "07:00", "close": "22:00" },
@@ -37,15 +185,89 @@
       "retailer_id": "aldi",
       "name": "ALDI Sydney Central",
       "address": "321 Castlereagh Street, Sydney NSW 2000",
+      "suburb": "Sydney",
+      "postcode": "2000",
       "location": { "lat": -33.873, "lng": 151.208 },
       "opening_hours": [
-        { "day": "Mon", "open": "08:00", "close": "21:00" },
-        { "day": "Tue", "open": "08:00", "close": "21:00" },
-        { "day": "Wed", "open": "08:00", "close": "21:00" },
-        { "day": "Thu", "open": "08:00", "close": "21:00" },
-        { "day": "Fri", "open": "08:00", "close": "21:00" },
-        { "day": "Sat", "open": "08:00", "close": "21:00" },
-        { "day": "Sun", "open": "08:00", "close": "21:00" }
+        { "day": "Mon", "open": "08:30", "close": "20:00" },
+        { "day": "Tue", "open": "08:30", "close": "20:00" },
+        { "day": "Wed", "open": "08:30", "close": "20:00" },
+        { "day": "Thu", "open": "08:30", "close": "20:00" },
+        { "day": "Fri", "open": "08:30", "close": "20:00" },
+        { "day": "Sat", "open": "08:30", "close": "20:00" },
+        { "day": "Sun", "open": "08:30", "close": "20:00" }
+      ]
+    },
+    {
+      "store_id": "aldi:nsw:9013",
+      "retailer_id": "aldi",
+      "name": "ALDI Alexandria",
+      "address": "1 Huntley Street, Alexandria NSW 2015",
+      "suburb": "Alexandria",
+      "postcode": "2015",
+      "location": { "lat": -33.906, "lng": 151.196 },
+      "opening_hours": [
+        { "day": "Mon", "open": "08:30", "close": "20:00" },
+        { "day": "Tue", "open": "08:30", "close": "20:00" },
+        { "day": "Wed", "open": "08:30", "close": "20:00" },
+        { "day": "Thu", "open": "08:30", "close": "20:00" },
+        { "day": "Fri", "open": "08:30", "close": "20:00" },
+        { "day": "Sat", "open": "08:30", "close": "20:00" },
+        { "day": "Sun", "open": "08:30", "close": "20:00" }
+      ]
+    },
+    {
+      "store_id": "aldi:nsw:9014",
+      "retailer_id": "aldi",
+      "name": "ALDI Waterloo",
+      "address": "200 Botany Road, Waterloo NSW 2017",
+      "suburb": "Waterloo",
+      "postcode": "2017",
+      "location": { "lat": -33.902, "lng": 151.206 },
+      "opening_hours": [
+        { "day": "Mon", "open": "08:30", "close": "20:00" },
+        { "day": "Tue", "open": "08:30", "close": "20:00" },
+        { "day": "Wed", "open": "08:30", "close": "20:00" },
+        { "day": "Thu", "open": "08:30", "close": "20:00" },
+        { "day": "Fri", "open": "08:30", "close": "20:00" },
+        { "day": "Sat", "open": "08:30", "close": "20:00" },
+        { "day": "Sun", "open": "08:30", "close": "20:00" }
+      ]
+    },
+    {
+      "store_id": "aldi:nsw:9015",
+      "retailer_id": "aldi",
+      "name": "ALDI Leichhardt",
+      "address": "149 Norton Street, Leichhardt NSW 2040",
+      "suburb": "Leichhardt",
+      "postcode": "2040",
+      "location": { "lat": -33.884, "lng": 151.159 },
+      "opening_hours": [
+        { "day": "Mon", "open": "08:30", "close": "20:00" },
+        { "day": "Tue", "open": "08:30", "close": "20:00" },
+        { "day": "Wed", "open": "08:30", "close": "20:00" },
+        { "day": "Thu", "open": "08:30", "close": "20:00" },
+        { "day": "Fri", "open": "08:30", "close": "20:00" },
+        { "day": "Sat", "open": "08:30", "close": "20:00" },
+        { "day": "Sun", "open": "08:30", "close": "20:00" }
+      ]
+    },
+    {
+      "store_id": "aldi:nsw:9016",
+      "retailer_id": "aldi",
+      "name": "ALDI Mascot",
+      "address": "1425 Botany Road, Mascot NSW 2020",
+      "suburb": "Mascot",
+      "postcode": "2020",
+      "location": { "lat": -33.928, "lng": 151.195 },
+      "opening_hours": [
+        { "day": "Mon", "open": "08:30", "close": "20:00" },
+        { "day": "Tue", "open": "08:30", "close": "20:00" },
+        { "day": "Wed", "open": "08:30", "close": "20:00" },
+        { "day": "Thu", "open": "08:30", "close": "20:00" },
+        { "day": "Fri", "open": "08:30", "close": "20:00" },
+        { "day": "Sat", "open": "08:30", "close": "20:00" },
+        { "day": "Sun", "open": "08:30", "close": "20:00" }
       ]
     }
   ]

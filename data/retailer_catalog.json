@@ -19,6 +19,42 @@
       "name": "ALDI Full Cream Milk 2L"
     },
     {
+      "retailer_product_id": "woolworths:milk:fc-1l-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "milk-fullcream-1l",
+      "name": "Woolworths Full Cream Milk 1L"
+    },
+    {
+      "retailer_product_id": "coles:milk:fc-1l-0001",
+      "retailer_id": "coles",
+      "canonical_id": "milk-fullcream-1l",
+      "name": "Coles Full Cream Milk 1L"
+    },
+    {
+      "retailer_product_id": "aldi:milk:fc-1l-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "milk-fullcream-1l",
+      "name": "ALDI Full Cream Milk 1L"
+    },
+    {
+      "retailer_product_id": "woolworths:milk:fc-3l-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "milk-fullcream-3l",
+      "name": "Woolworths Full Cream Milk 3L"
+    },
+    {
+      "retailer_product_id": "coles:milk:fc-3l-0001",
+      "retailer_id": "coles",
+      "canonical_id": "milk-fullcream-3l",
+      "name": "Coles Full Cream Milk 3L"
+    },
+    {
+      "retailer_product_id": "aldi:milk:fc-3l-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "milk-fullcream-3l",
+      "name": "ALDI Full Cream Milk 3L"
+    },
+    {
       "retailer_product_id": "woolworths:bread:wht-slc-0001",
       "retailer_id": "woolworths",
       "canonical_id": "bread-white-sliced",
@@ -35,6 +71,24 @@
       "retailer_id": "aldi",
       "canonical_id": "bread-white-sliced",
       "name": "ALDI White Sliced Bread"
+    },
+    {
+      "retailer_product_id": "woolworths:bread:wm-slc-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "bread-wholemeal-sliced",
+      "name": "Woolworths Wholemeal Sliced Bread"
+    },
+    {
+      "retailer_product_id": "coles:bread:wm-slc-0001",
+      "retailer_id": "coles",
+      "canonical_id": "bread-wholemeal-sliced",
+      "name": "Coles Wholemeal Sliced Bread"
+    },
+    {
+      "retailer_product_id": "aldi:bread:wm-slc-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "bread-wholemeal-sliced",
+      "name": "ALDI Wholemeal Sliced Bread"
     },
     {
       "retailer_product_id": "woolworths:eggs:12pk-0001",
@@ -55,6 +109,24 @@
       "name": "ALDI Free Range Eggs 12 Pack"
     },
     {
+      "retailer_product_id": "woolworths:eggs:18pk-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "eggs-18pk",
+      "name": "Woolworths Free Range Eggs 18 Pack"
+    },
+    {
+      "retailer_product_id": "coles:eggs:18pk-0001",
+      "retailer_id": "coles",
+      "canonical_id": "eggs-18pk",
+      "name": "Coles Free Range Eggs 18 Pack"
+    },
+    {
+      "retailer_product_id": "aldi:eggs:18pk-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "eggs-18pk",
+      "name": "ALDI Free Range Eggs 18 Pack"
+    },
+    {
       "retailer_product_id": "woolworths:bananas:per-kg-0001",
       "retailer_id": "woolworths",
       "canonical_id": "bananas-per-kg",
@@ -71,6 +143,42 @@
       "retailer_id": "aldi",
       "canonical_id": "bananas-per-kg",
       "name": "ALDI Bananas per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:apples:per-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "apples-per-kg",
+      "name": "Woolworths Apples per kg"
+    },
+    {
+      "retailer_product_id": "coles:apples:per-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "apples-per-kg",
+      "name": "Coles Apples per kg"
+    },
+    {
+      "retailer_product_id": "aldi:apples:per-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "apples-per-kg",
+      "name": "ALDI Apples per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:tomatoes:per-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "tomatoes-per-kg",
+      "name": "Woolworths Tomatoes per kg"
+    },
+    {
+      "retailer_product_id": "coles:tomatoes:per-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "tomatoes-per-kg",
+      "name": "Coles Tomatoes per kg"
+    },
+    {
+      "retailer_product_id": "aldi:tomatoes:per-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "tomatoes-per-kg",
+      "name": "ALDI Tomatoes per kg"
     },
     {
       "retailer_product_id": "woolworths:pasta:500g-0001",
@@ -91,6 +199,24 @@
       "name": "ALDI Penne Pasta 500g"
     },
     {
+      "retailer_product_id": "woolworths:pasta:1kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "pasta-1kg",
+      "name": "Woolworths Penne Pasta 1kg"
+    },
+    {
+      "retailer_product_id": "coles:pasta:1kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "pasta-1kg",
+      "name": "Coles Penne Pasta 1kg"
+    },
+    {
+      "retailer_product_id": "aldi:pasta:1kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "pasta-1kg",
+      "name": "ALDI Penne Pasta 1kg"
+    },
+    {
       "retailer_product_id": "woolworths:sauce:tom-700g-0001",
       "retailer_id": "woolworths",
       "canonical_id": "tomato-sauce-700g",
@@ -107,6 +233,222 @@
       "retailer_id": "aldi",
       "canonical_id": "tomato-sauce-700g",
       "name": "ALDI Tomato Pasta Sauce 700g"
+    },
+    {
+      "retailer_product_id": "woolworths:sauce:tom-400g-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "tomato-sauce-400g",
+      "name": "Woolworths Tomato Pasta Sauce 400g"
+    },
+    {
+      "retailer_product_id": "coles:sauce:tom-400g-0001",
+      "retailer_id": "coles",
+      "canonical_id": "tomato-sauce-400g",
+      "name": "Coles Tomato Pasta Sauce 400g"
+    },
+    {
+      "retailer_product_id": "aldi:sauce:tom-400g-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "tomato-sauce-400g",
+      "name": "ALDI Tomato Pasta Sauce 400g"
+    },
+    {
+      "retailer_product_id": "woolworths:rice:2kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "rice-2kg",
+      "name": "Woolworths Jasmine Rice 2kg"
+    },
+    {
+      "retailer_product_id": "coles:rice:2kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "rice-2kg",
+      "name": "Coles Jasmine Rice 2kg"
+    },
+    {
+      "retailer_product_id": "aldi:rice:2kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "rice-2kg",
+      "name": "ALDI Jasmine Rice 2kg"
+    },
+    {
+      "retailer_product_id": "woolworths:chicken:breast-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "chicken-breast-per-kg",
+      "name": "Woolworths Chicken Breast per kg"
+    },
+    {
+      "retailer_product_id": "coles:chicken:breast-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "chicken-breast-per-kg",
+      "name": "Coles Chicken Breast per kg"
+    },
+    {
+      "retailer_product_id": "aldi:chicken:breast-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "chicken-breast-per-kg",
+      "name": "ALDI Chicken Breast per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:beef:mince-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "mince-beef-per-kg",
+      "name": "Woolworths Beef Mince per kg"
+    },
+    {
+      "retailer_product_id": "coles:beef:mince-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "mince-beef-per-kg",
+      "name": "Coles Beef Mince per kg"
+    },
+    {
+      "retailer_product_id": "aldi:beef:mince-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "mince-beef-per-kg",
+      "name": "ALDI Beef Mince per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:cheese:ched-250g-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "cheese-cheddar-250g",
+      "name": "Woolworths Tasty Cheddar Cheese 250g"
+    },
+    {
+      "retailer_product_id": "coles:cheese:ched-250g-0001",
+      "retailer_id": "coles",
+      "canonical_id": "cheese-cheddar-250g",
+      "name": "Coles Tasty Cheddar Cheese 250g"
+    },
+    {
+      "retailer_product_id": "aldi:cheese:ched-250g-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "cheese-cheddar-250g",
+      "name": "ALDI Tasty Cheddar Cheese 250g"
+    },
+    {
+      "retailer_product_id": "woolworths:yogurt:1kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "yogurt-1kg",
+      "name": "Woolworths Greek Natural Yogurt 1kg"
+    },
+    {
+      "retailer_product_id": "coles:yogurt:1kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "yogurt-1kg",
+      "name": "Coles Greek Natural Yogurt 1kg"
+    },
+    {
+      "retailer_product_id": "aldi:yogurt:1kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "yogurt-1kg",
+      "name": "ALDI Greek Natural Yogurt 1kg"
+    },
+    {
+      "retailer_product_id": "woolworths:cereal:500g-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "cereal-500g",
+      "name": "Woolworths Corn Flakes 500g"
+    },
+    {
+      "retailer_product_id": "coles:cereal:500g-0001",
+      "retailer_id": "coles",
+      "canonical_id": "cereal-500g",
+      "name": "Coles Corn Flakes 500g"
+    },
+    {
+      "retailer_product_id": "aldi:cereal:500g-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "cereal-500g",
+      "name": "ALDI Corn Flakes 500g"
+    },
+    {
+      "retailer_product_id": "woolworths:oil:olive-500ml-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "olive-oil-500ml",
+      "name": "Woolworths Extra Virgin Olive Oil 500ml"
+    },
+    {
+      "retailer_product_id": "coles:oil:olive-500ml-0001",
+      "retailer_id": "coles",
+      "canonical_id": "olive-oil-500ml",
+      "name": "Coles Extra Virgin Olive Oil 500ml"
+    },
+    {
+      "retailer_product_id": "aldi:oil:olive-500ml-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "olive-oil-500ml",
+      "name": "ALDI Extra Virgin Olive Oil 500ml"
+    },
+    {
+      "retailer_product_id": "woolworths:onions:per-kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "onions-per-kg",
+      "name": "Woolworths Brown Onions per kg"
+    },
+    {
+      "retailer_product_id": "coles:onions:per-kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "onions-per-kg",
+      "name": "Coles Brown Onions per kg"
+    },
+    {
+      "retailer_product_id": "aldi:onions:per-kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "onions-per-kg",
+      "name": "ALDI Brown Onions per kg"
+    },
+    {
+      "retailer_product_id": "woolworths:potatoes:2kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "potatoes-2kg",
+      "name": "Woolworths Washed Potatoes 2kg"
+    },
+    {
+      "retailer_product_id": "coles:potatoes:2kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "potatoes-2kg",
+      "name": "Coles Washed Potatoes 2kg"
+    },
+    {
+      "retailer_product_id": "aldi:potatoes:2kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "potatoes-2kg",
+      "name": "ALDI Washed Potatoes 2kg"
+    },
+    {
+      "retailer_product_id": "woolworths:carrots:1kg-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "carrots-1kg",
+      "name": "Woolworths Carrots 1kg"
+    },
+    {
+      "retailer_product_id": "coles:carrots:1kg-0001",
+      "retailer_id": "coles",
+      "canonical_id": "carrots-1kg",
+      "name": "Coles Carrots 1kg"
+    },
+    {
+      "retailer_product_id": "aldi:carrots:1kg-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "carrots-1kg",
+      "name": "ALDI Carrots 1kg"
+    },
+    {
+      "retailer_product_id": "woolworths:juice:orange-2l-0001",
+      "retailer_id": "woolworths",
+      "canonical_id": "orange-juice-2l",
+      "name": "Woolworths Fresh Orange Juice 2L"
+    },
+    {
+      "retailer_product_id": "coles:juice:orange-2l-0001",
+      "retailer_id": "coles",
+      "canonical_id": "orange-juice-2l",
+      "name": "Coles Fresh Orange Juice 2L"
+    },
+    {
+      "retailer_product_id": "aldi:juice:orange-2l-0001",
+      "retailer_id": "aldi",
+      "canonical_id": "orange-juice-2l",
+      "name": "ALDI Fresh Orange Juice 2L"
     }
   ]
 }

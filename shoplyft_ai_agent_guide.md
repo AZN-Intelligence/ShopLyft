@@ -48,6 +48,25 @@ Agent: [Generates optimized multi-store shopping plan with savings calculation]
 
 ---
 
+## 🚀 Enhanced Features
+
+### 💡 Smart Unit Price Optimization
+- **Multiple package sizes**: Compare 1L, 2L, 3L milk with automatic unit price calculation
+- **Bulk buying recommendations**: AI suggests larger sizes when unit price is better
+- **Fair comparison**: Different package sizes compared on per-unit basis
+
+### 🗺️ Comprehensive Sydney Coverage  
+- **13 stores** across CBD and inner suburbs (Bondi, Newtown, Pyrmont, etc.)
+- **Realistic route optimization** with actual Sydney locations
+- **Geographic diversity** for better demo scenarios
+
+### 🎯 Enhanced Product Catalog
+- **25 products** across 5 categories (dairy, fresh-produce, pantry, meat, beverages)
+- **Smart categorization** improves AI substitution logic
+- **Extensive aliases** for natural language matching
+
+---
+
 ## 🧠 How the Agent Works (ConnectOnion Framework)
 
 The ShopLyft agent follows the **ConnectOnion agent loop**:
@@ -348,10 +367,16 @@ weights = {
 The agent is **100% compliant** with hackathon requirements:
 
 ### ✅ Uses Only Mock Data
-- All prices from `data/price_snapshots.json`
-- All stores from `data/stores.json`
-- All products from `data/products.json`
+- **25 products** across 5 categories with unit pricing from `data/price_snapshots.json`
+- **13 stores** across Sydney CBD and inner suburbs from `data/stores.json`  
+- **Multiple package sizes** for fair comparison from `data/products.json`
 - No external API calls or web scraping
+
+### ✅ Enhanced for AI Optimization
+- **Unit pricing** enables fair comparison across package sizes (1L vs 2L vs 3L milk)
+- **Product categories** improve substitution recommendations
+- **Geographic coverage** provides realistic route optimization scenarios
+- **Bulk buying advantages** demonstrated through unit price analysis
 
 ### ✅ Clear Disclaimers
 - Plans include "Prices based on mock data - not real-time"
