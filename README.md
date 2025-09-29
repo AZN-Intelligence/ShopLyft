@@ -21,7 +21,7 @@ ShopLyft is an AI-powered grocery shopping assistant that optimizes your shoppin
 
 2. **Authenticate with ConnectOnion**:
    ```bash
-   /Users/kenzee/Library/Python/3.13/bin/co auth
+   co auth
    ```
    (This will set up your OpenOnion API key automatically)
 
@@ -53,7 +53,7 @@ Agent: [Generates optimized shopping plan with:
 ```
 Shoplyft/
 ├── meta-agent/
-│   ├── agent.py          # Main AI agent implementation (714 lines)
+│   ├── agent.py          # Main AI agent implementation
 │   ├── prompt.md         # System prompt for the agent
 │   └── .co/              # ConnectOnion configuration
 │       └── config.toml   # Agent configuration
