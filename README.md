@@ -67,8 +67,9 @@ Shoplyft/
 
 ## AI Agent Tools
 
-The agent uses the following tools to optimize your shopping:
+The agent uses **18 specialized tools** to optimize your shopping:
 
+### Core Data Tools
 - `fetch_prices()` - Get prices for items across stores
 - `store_locator()` - Find nearby stores for each retailer
 - `distance_matrix()` - Calculate travel times between locations
@@ -76,6 +77,22 @@ The agent uses the following tools to optimize your shopping:
 - `cart_bridge()` - Create carts for each retailer
 - `persist_plan()` - Save the generated shopping plan
 - `log_event()` - Track optimization steps
+
+### Core Planning Functions
+- `normalize_shopping_list()` - Convert raw text to canonical product IDs
+- `match_candidates()` - Find product options per retailer
+- `build_initial_assignment()` - Assign items to cheapest stores
+- `apply_max_store_cap()` - Limit number of stores in route
+- `rebalance_for_min_spend()` - Optimize for Click & Collect eligibility
+- `tsp_order()` - Traveling Salesman route optimization
+- `score_plan()` - Calculate weighted cost/time score
+
+### Helper Functions
+- `candidate_stores()` - Get nearby stores for retailers
+- `compute_single_store_baseline()` - Calculate single-store comparison
+- `compute_totals()` - Generate final cost/time totals
+- `assemble_plan_json()` - Build Plan_v1 JSON structure
+- `render_human_summary()` - Create markdown summary
 
 ## Configuration
 
