@@ -1,6 +1,6 @@
 # 🛒 ShopLyft - AI Grocery Shopping Optimizer
 
-ShopLyft is an AI-powered grocery shopping assistant that optimizes your shopping across Woolworths, Coles, and ALDI to save time and money.
+ShopLyft is an AI-powered grocery shopping assistant that optimizes your shopping across Woolworths, Coles, and ALDI to save time and money. Built with the ConnectOnion framework for advanced AI agent capabilities.
 
 ## Features
 
@@ -10,27 +10,29 @@ ShopLyft is an AI-powered grocery shopping assistant that optimizes your shoppin
 - **Click & Collect integration**: Automatic eligibility checking with minimum spend requirements
 - **Savings calculation**: Shows total savings compared to shopping at a single store
 - **Smart substitutions**: Handles product substitutions with clear flagging
+- **ConnectOnion AI Agent**: Advanced AI reasoning with 18 specialized tools
 
 ## Quick Start
 
 1. **Install dependencies**:
    ```bash
-   pip install -r requirements.txt
+   pip install --user --break-system-packages connectonion
    ```
 
-2. **Set up your OpenAI API key**:
+2. **Authenticate with ConnectOnion**:
    ```bash
-   export OPENAI_API_KEY="your-api-key-here"
+   /Users/kenzee/Library/Python/3.13/bin/co auth
    ```
+   (This will set up your OpenOnion API key automatically)
 
 3. **Run the agent**:
    ```bash
-   python meta-agent/agent.py
+   python3 meta-agent/agent.py
    ```
 
 4. **Test the agent**:
    ```bash
-   python test_agent.py
+   python3 test_agent_simple.py
    ```
 
 ## Usage Example
@@ -51,8 +53,10 @@ Agent: [Generates optimized shopping plan with:
 ```
 Shoplyft/
 ├── meta-agent/
-│   ├── agent.py          # Main AI agent implementation
-│   └── prompt.md         # System prompt for the agent
+│   ├── agent.py          # Main AI agent implementation (714 lines)
+│   ├── prompt.md         # System prompt for the agent
+│   └── .co/              # ConnectOnion configuration
+│       └── config.toml   # Agent configuration
 ├── data/                 # Mock JSON database
 │   ├── retailers.json    # Retailer info and Click & Collect rules
 │   ├── stores.json       # Store locations and hours
@@ -60,8 +64,9 @@ Shoplyft/
 │   ├── retailer_catalog.json # Product mappings per retailer
 │   ├── price_snapshots.json  # Current prices
 │   └── plans.json        # Generated shopping plans
-├── test_agent.py         # Simple test script
-├── requirements.txt      # Python dependencies
+├── test_agent_simple.py  # Simple test script
+├── .env                  # Environment variables (API keys)
+├── .gitignore           # Git ignore rules
 └── README.md            # This file
 ```
 
@@ -97,19 +102,43 @@ The agent uses **18 specialized tools** to optimize your shopping:
 ## Configuration
 
 The agent is configured with:
+- **Model**: `co/o4-mini` (ConnectOnion managed model)
 - **Max iterations**: 16 (sufficient for complex optimization)
 - **Optimization weights**: 20% time, 80% cost (configurable)
 - **Max stores**: 3 (Woolworths, Coles, ALDI)
 - **Currency**: AUD
 - **Timezone**: Australia/Sydney
+- **Authentication**: OpenOnion API key (auto-configured)
+
+## ConnectOnion Integration
+
+This project uses the ConnectOnion framework for:
+- **AI Agent Management**: Advanced reasoning and tool orchestration
+- **API Key Management**: Automatic authentication with OpenOnion
+- **Model Access**: Managed access to `co/o4-mini` model
+- **Behavior Tracking**: Built-in logging and monitoring
+- **Tool Integration**: Seamless function calling and execution
+
+## Test Results
+
+✅ **Successfully Tested**: The agent processes shopping lists and returns optimized plans:
+```
+Input: Shopping list: milk, bread, eggs. Location: -33.871, 151.206 (Sydney CBD)
+Output: Complete optimized plan with store selection, pricing, and route optimization
+```
 
 ## Hackathon Compliance
 
 - ✅ Uses mock JSON data only (no live scraping)
-- ✅ All code in public repository
+- ✅ All code in public GitHub repository
 - ✅ ConnectOnion framework for AI agent
 - ✅ Comprehensive optimization algorithms
+- ✅ Fully functional and tested
 - ✅ Ready for demo and pitch
+
+## GitHub Repository
+
+View the complete source code: [https://github.com/AZN-Intelligence/ShopLyft.git](https://github.com/AZN-Intelligence/ShopLyft.git)
 
 ## Next Steps
 
