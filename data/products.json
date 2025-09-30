@@ -51,7 +51,7 @@
       "category": "dairy",
       "unit_type": "count",
       "unit_size": 12,
-      "unit_measure": "each",
+      "unit_measure": "piece",
       "aliases": ["eggs", "12 eggs", "dozen eggs", "free range eggs"]
     },
     {
@@ -60,7 +60,7 @@
       "category": "dairy",
       "unit_type": "count",
       "unit_size": 18,
-      "unit_measure": "each",
+      "unit_measure": "piece",
       "aliases": ["18 eggs", "large eggs", "family eggs"]
     },
     {
