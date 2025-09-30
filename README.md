@@ -8,20 +8,23 @@
 An intelligent grocery shopping assistant that optimizes your shopping across **Woolworths**, **Coles**, and **ALDI** to maximize savings and minimize travel time. Built with advanced AI agent technology using the ConnectOnion framework.
 
 ## 🌟 Features
-
-- **🤖 AI-Powered Optimization**: Advanced AI agent with 18 specialized tools for intelligent decision making
+- **🤖 Hybrid AI Architecture**: Clear separation of AI parsing and algorithmic optimization
 - **💰 Multi-Store Price Comparison**: Find the best deals across Australia's major supermarkets
 - **🗺️ Smart Route Planning**: Traveling Salesman algorithm for optimal store visiting order
 - **📱 Click & Collect Integration**: Automatic eligibility checking and cart optimization
-- **💡 Smart Substitutions**: Intelligent product matching with transparent substitution flagging
+- **🔒 Strict Data Mapping**: Only uses pre-existing stores and products from JSON data
 - **📊 Savings Analysis**: Real-time calculation of savings vs single-store shopping
 - **⚡ Natural Language Input**: Simple text input like "milk, bread, eggs, location: Sydney CBD"
 
 ## 🚀 How It Works
 
 1. **Input**: Natural language shopping list + location
-2. **AI Processing**: 18 specialized tools analyze prices, locations, and optimization constraints
-3. **Optimization**: Advanced algorithms balance cost savings (80%) vs time efficiency (20%)
+2. **AI Parsing**: LLM maps user input to pre-existing products in products.json
+3. **Route Chooser**: Multi-part algorithmic optimization:
+   - Generate price dataset from all JSON files
+   - Generate all possible routes for all stores
+   - Score routes based on time (20%) and price (80%)
+   - Find optimal route with best score
 4. **Output**: Complete shopping plan with store route, item assignments, and savings calculation
 
 ```
@@ -31,26 +34,55 @@ Output: Optimized plan visiting 2-3 stores, saving $3-8, 25-35 minutes total tim
 
 ## 🛠️ Technology Stack
 
-- **AI Framework**: ConnectOnion for advanced agent capabilities
-- **Optimization**: Traveling Salesman Problem (TSP) algorithms
-- **Data**: Enhanced JSON database with 25 products across 13 Sydney stores
-- **Language**: Python 3.8+ with comprehensive type hints
-- **Architecture**: Function-based tools with automatic AI orchestration
+- **AI Framework**: ConnectOnion for LLM-based natural language processing
+- **Optimization**: Pure algorithmic approach with TSP and combinatorics
+- **Data**: JSON database with strict mapping structure:
+  - **products.json**: Product definitions and aliases for AI parsing
+  - **stores.json**: Store locations and addresses for route planning
+  - **price_snapshots.json**: Current prices for cost optimization
+  - **retailer_catalog.json**: Product availability by retailer
+  - **retailers.json**: Retailer rules (Click & Collect, etc.)
+- **Language**: Python 3.8+ with comprehensive type hints and Pydantic models
+- **Architecture**: Hybrid approach - AI for parsing, algorithms for optimization
+
+## 🏗️ Architecture Overview
+
+### Hybrid AI + Algorithms Approach
+The ShopLyft agent uses a **clear separation of concerns**:
+
+1. **AI Parsing (LLM)**: 
+   - Maps natural language input to pre-existing products in `products.json`
+   - Uses ConnectOnion's `llm_do` with Pydantic models for structured output
+   - Strict validation ensures only valid canonical_ids are used
+
+2. **Route Chooser (Pure Algorithms)**:
+   - **Price Dataset**: Generates (item, price, store) combinations from all JSON files
+   - **Route Generation**: Creates all possible store combinations using combinatorics
+   - **Route Scoring**: Balances cost (80%) vs time (20%) using Haversine distance
+   - **Optimal Route**: Selects best scoring route using TSP optimization
+
+### Data Mapping Structure
+- **products.json**: Product definitions and aliases for AI parsing
+- **stores.json**: Store locations and addresses for route planning  
+- **price_snapshots.json**: Current prices for cost optimization
+- **retailer_catalog.json**: Product availability by retailer
+- **retailers.json**: Retailer rules (Click & Collect, etc.)
 
 ## 📊 Performance Metrics
 
 - **Average Savings**: 5-15% compared to single-store shopping
-- **Coverage**: 13 stores across Sydney CBD and inner suburbs
+- **Coverage**: 15 stores across Sydney CBD and inner suburbs
 - **Product Catalog**: 25 products across 5 major categories
 - **Optimization Speed**: Complete plans generated in 15-30 seconds
 - **Route Efficiency**: TSP algorithm for minimal travel time
+- **Data Integrity**: Strict validation ensures only pre-existing stores/products are used
 
 ## 🏆 Hackathon Ready
 
-- ✅ **Innovation**: Advanced AI agent with sophisticated optimization
-- ✅ **Technical Complexity**: 18 specialized tools, unit pricing, route optimization
+- ✅ **Innovation**: Hybrid AI architecture with clear separation of concerns
+- ✅ **Technical Complexity**: Multi-part route chooser with algorithmic optimization
 - ✅ **User Experience**: Natural language input, human-readable output
-- ✅ **Feasibility**: Production-ready architecture with comprehensive error handling
+- ✅ **Feasibility**: Production-ready architecture with strict data validation
 - ✅ **Presentation**: Clean code, extensive documentation, demo-ready
 
 ## 📄 License
@@ -107,9 +139,6 @@ co auth
 ```bash
 # Test the agent
 python meta-agent/agent.py
-
-# Or run the simple test
-python test_agent_simple.py
 ```
 
 ### 5. Project Structure Overview
@@ -119,24 +148,23 @@ ShopLyft/
 ├── meta-agent/
 │   ├── agent.py          # Main AI agent implementation
 │   ├── prompt.md         # System prompt for the agent
-│   └── .co/              # ConnectOnion configuration
-├── data/                 # JSON database
-│   ├── retailers.json    # Retailer info and Click & Collect rules
-│   ├── stores.json       # 13 stores across Sydney with locations
-│   ├── products.json     # 25 products with categories and unit pricing
-│   ├── retailer_catalog.json # Product mappings per retailer
-│   ├── price_snapshots.json  # Prices with unit pricing for comparison
+│   ├── shoplyft_ai_agent.md # Agent specification
+│   └── connectoniondocumentation.md # ConnectOnion framework docs
+├── data/                 # JSON database with strict mapping
+│   ├── products.json     # Product definitions and aliases for AI parsing
+│   ├── stores.json       # Store locations and addresses for route planning
+│   ├── price_snapshots.json # Current prices for cost optimization
+│   ├── retailer_catalog.json # Product availability by retailer
+│   ├── retailers.json    # Retailer rules (Click & Collect, etc.)
 │   └── plans.json        # Generated shopping plans
-├── test_agent_simple.py  # Simple test script
+├── frontend/             # React frontend (optional)
+├── shoplyft_ai_agent_guide.md # Complete user guide
+├── shoplyft_project_prompt.md # Project specification
+├── requirements.txt      # Python dependencies
 └── README.md            # This file
 ```
 
 ## 🧪 Testing the Agent
-
-### Basic Test
-```bash
-python test_agent_simple.py
-```
 
 ### Interactive Testing
 ```bash
@@ -189,21 +217,24 @@ python -u meta-agent/agent.py
 
 ### Configuration
 - **Model**: `co/o4-mini` (managed by ConnectOnion)
-- **Max iterations**: 16 (sufficient for complex optimization)
+- **Max iterations**: 8 (reduced since main work is in algorithms)
 - **Optimization weights**: 20% time, 80% cost
 - **Max stores**: 3 (Woolworths, Coles, ALDI)
+- **Architecture**: Hybrid - AI for parsing, algorithms for optimization
 
 ### Key Files to Understand
-1. `meta-agent/agent.py` - Main agent implementation
+1. `meta-agent/agent.py` - Main agent implementation with hybrid architecture
 2. `meta-agent/prompt.md` - System instructions for the AI
-3. `data/*.json` - Database with products, stores, and pricing
-4. `test_agent_simple.py` - Test script for validation
+3. `meta-agent/shoplyft_ai_agent.md` - Complete agent specification
+4. `data/*.json` - Database with strict mapping structure
+5. `shoplyft_ai_agent_guide.md` - Comprehensive user guide
 
 ### Making Changes
 - **Add products**: Edit `data/products.json` and `data/retailer_catalog.json`
 - **Add stores**: Edit `data/stores.json`
 - **Modify pricing**: Edit `data/price_snapshots.json`
 - **Change AI behavior**: Edit `meta-agent/prompt.md`
+- **Update architecture**: Edit `meta-agent/agent.py` (hybrid AI + algorithms)
 
 ## ✅ Ready to Demo!
 

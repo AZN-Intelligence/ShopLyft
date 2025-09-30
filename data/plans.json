@@ -1,3 +1,19 @@
 {
-  "plans": []
+  "plans": [
+    {
+      "plan_id": "plan_000001",
+      "generated_at": "2025-09-30T10:02:24.165880+00:00",
+      "payload": "{\"version\":\"v1\",\"user_location\":{\"lat\":-33.873,\"lng\":151.208},\"stores\":[{\"store_name\":\"ALDI Sydney Central\",\"store_address\":null,\"eta_travel_minutes\":1.0,\"eta_instore_minutes\":6.0,\"baskets\":[{\"item\":\"Milk\",\"quantity\":1,\"unit\":\"2L\",\"unit_price\":2.29,\"line_total\":2.29,\"substitution\":false},{\"item\":\"Bread\",\"quantity\":1,\"unit\":\"700g\",\"unit_price\":1.00,\"line_total\":1.00,\"substitution\":false},{\"item\":\"Eggs\",\"quantity\":1,\"unit\":\"12 pack\",\"unit_price\":3.49,\"line_total\":3.49,\"substitution\":false}],\"click_and_collect\":{\"button_enabled\":false,\"reason_if_disabled\":\"Below min spend ($30).\"},\"store_subtotal\":6.78}],\"route\":[\"ALDI Sydney Central\"],\"totals\":{\"store_subtotals\":[6.78],\"grand_total\":6.78,\"total_travel_time\":1.0,\"total_instore_time\":6.0,\"total_time\":7.0,\"baseline_single_store\":{\"store\":\"Woolworths Town Hall\",\"cost\":8.40},\"savings\":1.62},\"assumptions\":[\"Prices estimated due to tool failure (ALDI milk $2.29, bread $1.00, eggs $3.49)\",\"Travel distance/time estimated (0.5km at 30km/h)\",\"No store address available in mock data\"],\"warnings\":[\"Data fetching tools failed; plan based on best-effort approximations.\"]}"
+    },
+    {
+      "plan_id": "plan_000002",
+      "generated_at": "2025-09-30T10:10:52.581923+00:00",
+      "payload": "{\"plan_id\":\"plan_001\",\"user_location\":{\"lat\":-33.873,\"lng\":151.208},\"stores\":[{\"name\":\"ALDI Sydney Central\",\"retailer\":\"ALDI\",\"location\":{\"lat\":-33.872,\"lng\":151.210},\"items\":[{\"id\":\"ALDI-MILK-2L\",\"name\":\"Fresh Milk 2L\",\"quantity\":1,\"unit\":\"unit\",\"unit_price\":1.90,\"line_total\":1.90,\"substitution\":false,\"note\":null},{\"id\":\"ALDI-BREAD-700G\",\"name\":\"White Sandwich Loaf 700g\",\"quantity\":1,\"unit\":\"unit\",\"unit_price\":1.80,\"line_total\":1.80,\"substitution\":false,\"note\":null},{\"id\":\"ALDI-EGGS-12\",\"name\":\"Free Range Eggs Dozen\",\"quantity\":1,\"unit\":\"unit\",\"unit_price\":3.90,\"line_total\":3.90,\"substitution\":false,\"note\":null}],\"store_subtotal\":7.60,\"eta_travel_minutes\":1.0,\"eta_instore_minutes\":5.0,\"click_and_collect\":{\"enabled\":false,\"button_enabled\":false,\"reason_if_disabled\":\"Not available at ALDI.\"}}],\"grand_subtotal\":7.60,\"baseline_single_store_cost\":7.60,\"total_savings\":0.00,\"meta\":{\"assumptions\":[],\"warnings\":[]}}"
+    },
+    {
+      "plan_id": "plan_000003",
+      "generated_at": "2025-09-30T11:05:47.412316+00:00",
+      "payload": "{\"stores\":[{\"store_id\":\"ALDI_Sydney_Central\",\"store_name\":\"ALDI Sydney Central\",\"address\":\"[Address from stores.json]\",\"distance_km\":1.57,\"travel_time_min\":3.1,\"items\":[{\"product\":\"Milk 2L\",\"quantity\":1,\"unit_price\":2.20,\"total_price\":2.20},{\"product\":\"Bread\",\"quantity\":1,\"unit_price\":1.20,\"total_price\":1.20},{\"product\":\"Eggs (dozen)\",\"quantity\":1,\"unit_price\":3.50,\"total_price\":3.50}],\"in_store_time_min\":6.0,\"click_and_collect\":{\"eligible\":true,\"minimum_spend\":0.0}}],\"total_cost\":6.90,\"total_travel_time\":3.1,\"total_in_store_time\":6.0,\"total_time\":9.1,\"route_score\":7.04}"
+    }
+  ]
 }
