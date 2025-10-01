@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import LandingPage from "./components/LandingPage/LandingPage";
-import ShoppingListForm from "./components/ShoppingListForm/ShoppingListForm";
+import LandingPage from "./components/features/landing/LandingPage/LandingPage";
+import ShoppingListForm from "./components/features/shopping/ShoppingListForm";
 
 function App() {
   const [showLanding, setShowLanding] = useState(true);
