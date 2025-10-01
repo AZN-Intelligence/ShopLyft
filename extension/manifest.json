@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "ShopLyft Auto Add to Cart",
+  "version": "1.0",
+  "description": "Automates adding grocery products to cart from provided links.",
+  "permissions": ["scripting", "tabs", "notifications"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "https://localhost/*",
+        "http://localhost:5173/*",
+        "https://localhost:5173/*",
+        "https://shoplyft.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
