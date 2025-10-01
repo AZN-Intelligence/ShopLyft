@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { type PlanData, TEMPLATE_PLAN } from "./planTemplate";
 import SupermarketIcon from "./SupermarketIcon";
 import AddToCartButton from "./AddToCartButton";
+// import { woolworthsLinks, colesLinks, aldiLinks } from "./planTemplate";
 
 interface PlanLayoutProps {
   planData?: PlanData;
@@ -155,8 +156,11 @@ function PlanLayout({
 
                         {/* Footer */}
                         <div className="flex justify-between items-center pt-3 border-t border-orange-100">
-                          {/* Add to Cart Button */}
-                          <AddToCartButton size="sm" />
+                          {/* Add to Cart Button with store-specific links */}
+                          <AddToCartButton
+                            size="sm"
+                            links={store.links || []}
+                          />
                           {/* Status Badge */}
                           <span
                             className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
@@ -262,8 +266,11 @@ function PlanLayout({
                   {/* Add All to Cart Button */}
                   <button
                     onClick={() => {
-                      // TODO: Implement add all to cart functionality
-                      console.log("Add all to cart clicked");
+                      // Find and click all AddToCartButton buttons
+                      const buttons = document.querySelectorAll('[data-shoplyft-add-to-cart]');
+                      buttons.forEach((btn) => {
+                        (btn as HTMLButtonElement).click();
+                      });
                     }}
                     className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg flex flex-col items-center justify-center"
                   >
