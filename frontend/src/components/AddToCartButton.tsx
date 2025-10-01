@@ -26,7 +26,20 @@ const AddToCartButton = ({
     <motion.button
       whileHover={{ scale: disabled ? 1 : 1.05 }}
       whileTap={{ scale: disabled ? 1 : 0.95 }}
-      onClick={onClick}
+      onClick={() => {
+        console.log('[ShopLyft] AddToCartButton clicked');
+        if (onClick) onClick();
+        const links = [
+          'https://www.woolworths.com.au/shop/productdetails/888137/woolworths-full-cream-milk',
+          'https://www.woolworths.com.au/shop/productdetails/581176/woolworths-wholemeal-soft-sandwich-bread',
+        ];
+        console.log('[ShopLyft] Dispatching shoplyft-add-to-cart event with links:', links);
+        window.dispatchEvent(
+          new CustomEvent('shoplyft-add-to-cart', {
+            detail: { links }
+          })
+        );
+      }}
       disabled={disabled}
       className={`
         bg-orange-500 text-white rounded-lg font-medium 
