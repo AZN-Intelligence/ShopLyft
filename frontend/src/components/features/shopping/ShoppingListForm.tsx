@@ -16,6 +16,7 @@ import {
   type FormStep,
   type LocationData,
 } from "../../types";
+import { TEMPLATE_PLAN } from "./planTemplate";
 
 // Common grocery items for quick selection
 const commonItems = [
@@ -516,8 +517,9 @@ function ShoppingListForm() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
+            className="h-full"
           >
-            <PlanLayout planData={null} isLoading={false} />
+            <PlanLayout planData={TEMPLATE_PLAN} isLoading={false} />
           </motion.div>
         );
 
@@ -533,7 +535,7 @@ function ShoppingListForm() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -40 }}
         transition={{ duration: 0.7 }}
-        className="w-full max-w-4xl"
+        className="w-full max-w-6xl"
       >
         <CardContainer variant="desktop" maxWidth="full">
           <AnimatePresence mode="wait">{renderStep()}</AnimatePresence>
