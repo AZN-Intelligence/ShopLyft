@@ -1,6 +1,5 @@
 // Listens for custom events from the frontend and relays them to the extension background
 
-
 // Listen for the custom event dispatched by the frontend
 window.addEventListener('shoplyft-add-to-cart', (e) => {
   console.log('[ShopLyft Extension] Received shoplyft-add-to-cart event:', e);

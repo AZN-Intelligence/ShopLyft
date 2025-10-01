@@ -1,7 +1,6 @@
 // Receives messages from the content script and automates adding products to cart
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('Received in background:', message);
-  // alert() is not available in service workers; use console.log only
   if (message.action === 'addToCart' && Array.isArray(message.links)) {
     let completed = 0;
     const total = message.links.length;
