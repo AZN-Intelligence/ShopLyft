@@ -1,3 +1,21 @@
+// Export product links for use in AddToCartButton
+// Example sets of product links for different AddToCartButton instances
+// export const woolworthsLinks = [
+//   'https://www.woolworths.com.au/shop/productdetails/888137/woolworths-full-cream-milk',
+//   'https://www.woolworths.com.au/shop/productdetails/581176/woolworths-wholemeal-soft-sandwich-bread',
+//   'https://www.woolworths.com.au/shop/productdetails/224763/woolworths-12-x-large-free-range-eggs',
+// ];
+
+// export const colesLinks = [
+//   'https://www.coles.com.au/product/coles-rspca-approved-chicken-breast-fillets-large-pack-approx.-1.4kg-2263179',
+//   'https://www.coles.com.au/product/coles-basmati-rice-1kg',
+//   'https://www.coles.com.au/product/coles-gourmet-field-tomatoes-1-kg-4640831'
+// ];
+
+// export const aldiLinks = [
+//   'https://www.aldi.com.au/product/organic-bananas-1kg',
+//   'https://www.aldi.com.au/product/greek-yogurt-1kg',
+// ];
 // Plan data structure interfaces
 export interface PlanItem {
   product_name: string;
@@ -14,6 +32,7 @@ export interface StoreBasket {
     address: string;
     retailer_id: string;
   };
+  links: string[]
   items: PlanItem[];
   subtotal: number;
   click_collect_available: boolean;
@@ -94,27 +113,32 @@ export const TEMPLATE_PLAN: PlanData = {
       items: [
         {
           product_name: "Woolworths Full Cream Milk 2L",
-          quantity: 2,
-          unit_price: 3.6,
-          line_total: 7.2,
+          quantity: 1,
+          unit_price: 3.2,
+          line_total: 3.2,
           item_requested: "2L milk",
         },
         {
           product_name: "Woolworths Wholemeal Bread",
           quantity: 1,
-          unit_price: 2.5,
-          line_total: 2.5,
+          unit_price: 2.7,
+          line_total: 2.7,
           item_requested: "wholemeal bread",
         },
         {
-          product_name: "Woolworths Free Range Eggs 12pk",
+          product_name: "Woolworths 12 X-Large Free Range Eggs",
           quantity: 1,
-          unit_price: 4.2,
-          line_total: 4.2,
+          unit_price: 6.6,
+          line_total: 6.6,
           item_requested: "12 free-range eggs",
         },
       ],
-      subtotal: 13.9,
+      links : [
+        'https://www.woolworths.com.au/shop/productdetails/888137/woolworths-full-cream-milk',
+        'https://www.woolworths.com.au/shop/productdetails/581176/woolworths-wholemeal-soft-sandwich-bread',
+        'https://www.woolworths.com.au/shop/productdetails/224763/woolworths-12-x-large-free-range-eggs'
+      ],
+      subtotal: 12.5,
       click_collect_available: true,
       min_spend_met: true,
     },
@@ -127,28 +151,33 @@ export const TEMPLATE_PLAN: PlanData = {
       },
       items: [
         {
-          product_name: "Coles Chicken Breast 1kg",
+          product_name: "Coles Chicken Breast 1.4kg",
           quantity: 1,
-          unit_price: 8.5,
-          line_total: 8.5,
-          item_requested: "1kg chicken breast",
+          unit_price: 15.4,
+          line_total: 15.4,
+          item_requested: "1.4kg chicken breast",
         },
         {
           product_name: "Coles Basmati Rice 1kg",
           quantity: 1,
-          unit_price: 3.2,
-          line_total: 3.2,
+          unit_price: 4,
+          line_total: 4,
           item_requested: "1kg rice",
         },
         {
-          product_name: "Coles Tomatoes 500g",
+          product_name: "Coles Tomatoes 1kg",
           quantity: 1,
-          unit_price: 2.8,
-          line_total: 2.8,
+          unit_price: 3.9,
+          line_total: 3.9,
           item_requested: "tomatoes",
         },
       ],
-      subtotal: 14.5,
+      links : [
+        'https://www.coles.com.au/product/coles-rspca-approved-chicken-breast-fillets-large-pack-approx.-1.4kg-2263179',
+        'https://www.coles.com.au/product/coles-basmati-rice-1kg-8703059',
+        'https://www.coles.com.au/product/coles-gourmet-field-tomatoes-1-kg-4640831'
+      ],
+      subtotal: 23.3,
       click_collect_available: true,
       min_spend_met: true,
     },
@@ -159,37 +188,27 @@ export const TEMPLATE_PLAN: PlanData = {
         address: "73 Oxford St, Darlinghurst NSW 2010",
         retailer_id: "aldi",
       },
+      links : [
+        "https://www.aldi.com.au/product/no-brand-cavendish-bananas-loose-000000000000380234",
+        "https://www.aldi.com.au/product/jalna-sweet-creamy-greek-style-yogurt-1kg-000000000000399510"
+      ],
       items: [
         {
-          product_name: "ALDI Organic Bananas 1kg",
+          product_name: "ALDI Bananas 1kg",
           quantity: 1,
-          unit_price: 2.9,
-          line_total: 2.9,
+          unit_price: 3.99,
+          line_total: 3.99,
           item_requested: "organic bananas",
         },
         {
           product_name: "ALDI Greek Yogurt 1kg",
           quantity: 1,
-          unit_price: 4.5,
-          line_total: 4.5,
+          unit_price: 6.49,
+          line_total: 6.49,
           item_requested: "greek yogurt",
         },
-        {
-          product_name: "ALDI Olive Oil 500ml",
-          quantity: 1,
-          unit_price: 5.95,
-          line_total: 5.95,
-          item_requested: "olive oil",
-        },
-        {
-          product_name: "ALDI Pasta 500g",
-          quantity: 2,
-          unit_price: 1.2,
-          line_total: 2.4,
-          item_requested: "pasta",
-        },
       ],
-      subtotal: 15.75,
+      subtotal: 10.48,
       click_collect_available: false,
       min_spend_met: false,
     },

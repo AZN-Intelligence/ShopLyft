@@ -4,12 +4,14 @@ interface AddToCartButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
+  links: string[];
 }
 
 const AddToCartButton = ({
   onClick,
   disabled = false,
   size = "sm",
+  links,
 }: AddToCartButtonProps) => {
   const getSizeClasses = () => {
     switch (size) {
@@ -29,10 +31,6 @@ const AddToCartButton = ({
       onClick={() => {
         console.log('[ShopLyft] AddToCartButton clicked');
         if (onClick) onClick();
-        const links = [
-          'https://www.woolworths.com.au/shop/productdetails/888137/woolworths-full-cream-milk',
-          'https://www.woolworths.com.au/shop/productdetails/581176/woolworths-wholemeal-soft-sandwich-bread',
-        ];
         console.log('[ShopLyft] Dispatching shoplyft-add-to-cart event with links:', links);
         window.dispatchEvent(
           new CustomEvent('shoplyft-add-to-cart', {
@@ -47,6 +45,7 @@ const AddToCartButton = ({
         disabled:bg-gray-400 disabled:cursor-not-allowed
         ${getSizeClasses()}
       `}
+      data-shoplyft-add-to-cart
     >
       Add to Cart
     </motion.button>
