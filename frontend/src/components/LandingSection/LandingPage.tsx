@@ -1,21 +1,27 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import LandingContent from "./LandingContent";
-import FloatingMemo from "./FloatingMemo";
+import DesktopLandingContent from "./DesktopLandingContent";
+import MobileLandingContent from "./MobileLandingContent";
+import FloatingMemo from "../LandingSection/FloatingMemo";
 
 function NewLandingPage() {
   const [shoppingList, setShoppingList] = useState<string>("");
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleSendList = (text: string) => {
+  const handleSendList = (text: string, location: string) => {
     setShoppingList(text);
     setIsAnimating(true);
-    console.log("Shopping list submitted:", text);
+    console.log("Shopping list submitted:", text, "Location:", location);
     // Navigate to loading screen after animation completes
     setTimeout(() => {
       // This will be handled by the parent component
       window.dispatchEvent(
-        new CustomEvent("navigateToLoading", { detail: { shoppingList: text } })
+        new CustomEvent("navigateToLoading", {
+          detail: {
+            shoppingList: text,
+            location: location,
+          },
+        })
       );
     }, 1800);
   };
@@ -23,27 +29,39 @@ function NewLandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex items-center justify-center p-4">
       <div className="max-w-6xl w-full">
+        {/* Desktop Layout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isAnimating ? 0 : 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          className="hidden lg:grid grid-cols-2 gap-16 items-center"
         >
           {/* Left Side - Landing Content */}
-          <div className="order-2 lg:order-1">
-            <LandingContent />
+          <div>
+            <DesktopLandingContent />
           </div>
 
           {/* Right Side - Floating Memo */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end h-full pt-16">
+          <div className="flex justify-end h-full pt-16">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
+              className="w-[30vw] max-w-4xl mx-auto"
             >
               <FloatingMemo onSend={handleSendList} />
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* Mobile Layout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isAnimating ? 0 : 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="lg:hidden"
+        >
+          <MobileLandingContent onSend={handleSendList} />
         </motion.div>
 
         {/* Background Decoration */}

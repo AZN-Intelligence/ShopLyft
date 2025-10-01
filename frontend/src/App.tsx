@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import NewLandingPage from "./components/NewLandingPage";
-import PlanLayout from "./components/PlanLayout";
+import NewLandingPage from "./components/LandingSection/LandingPage";
+import PlanLayout from "./components/PlanSection/PlanLayout";
 
 function App() {
   const [currentStep, setCurrentStep] = useState<

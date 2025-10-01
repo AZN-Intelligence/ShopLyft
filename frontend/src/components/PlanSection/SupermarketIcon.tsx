@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import aldiBg from "../assets/aldi-bg.png";
-import colesBg from "../assets/coles-bg.png";
-import woolworthBg from "../assets/woolworth-bg.webp";
+import aldiBg from "../../assets/aldi-bg.png";
+import colesBg from "../../assets/coles-bg.png";
+import woolworthBg from "../../assets/woolworth-bg.webp";
 
 interface SupermarketIconProps {
   retailerId: string;

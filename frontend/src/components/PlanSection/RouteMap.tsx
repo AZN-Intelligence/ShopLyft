@@ -1,0 +1,130 @@
+import { motion } from "framer-motion";
+import { type PlanData } from "./planTemplate";
+
+interface RouteMapProps {
+  planData: PlanData;
+  isExpanded: boolean;
+  onExpand: () => void;
+}
+
+function RouteMap({ planData, isExpanded, onExpand }: RouteMapProps) {
+  return (
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-bold text-orange-600">Route Map</h3>
+        <button
+          onClick={onExpand}
+          className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center space-x-1 transition-colors"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+            />
+          </svg>
+          <span>Expand Map</span>
+        </button>
+      </div>
+      <div
+        className="bg-white rounded-lg shadow-lg overflow-hidden h-64 md:h-80 lg:h-96 cursor-pointer"
+        onClick={onExpand}
+      >
+        <iframe
+          src={`https://www.google.com/maps/embed/v1/directions?key=${
+            import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+          }&origin=${encodeURIComponent(
+            planData.starting_location.address
+          )}&destination=${encodeURIComponent(
+            planData.stores[planData.stores.length - 1].store_info.address
+          )}&waypoints=${planData.stores
+            .slice(0, -1)
+            .map((store) => encodeURIComponent(store.store_info.address))
+            .join("|")}&mode=walking`}
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Shopping Route Map"
+        />
+      </div>
+
+      {/* Expanded Map Modal */}
+      {isExpanded && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => onExpand()}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-white rounded-lg shadow-2xl w-full max-w-6xl h-[80vh] relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
+              <h3 className="text-xl font-bold text-orange-600">
+                Shopping Route Map
+              </h3>
+              <button
+                onClick={() => onExpand()}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Expanded Map */}
+            <div className="h-[calc(100%-4rem)]">
+              <iframe
+                src={`https://www.google.com/maps/embed/v1/directions?key=${
+                  import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+                }&origin=${encodeURIComponent(
+                  planData.starting_location.address
+                )}&destination=${encodeURIComponent(
+                  planData.stores[planData.stores.length - 1].store_info.address
+                )}&waypoints=${planData.stores
+                  .slice(0, -1)
+                  .map((store) => encodeURIComponent(store.store_info.address))
+                  .join("|")}&mode=walking`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Shopping Route Map - Expanded"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+export default RouteMap;
