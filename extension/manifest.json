@@ -4,9 +4,7 @@
   "version": "1.0",
   "description": "Automates adding grocery products to cart from provided links.",
   "permissions": ["scripting", "tabs", "notifications"],
-  "host_permissions": [
-    "<all_urls>"
-  ],
+  "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
       "matches": [
@@ -18,7 +16,8 @@
         "https://127.0.0.1/*",
         "http://127.0.0.1:5173/*",
         "https://127.0.0.1:5173/*",
-        "https://shoplyft.com/*"
+        "https://shoplyft.com/*",
+        "<all_urls>"
       ],
       "js": ["content.js"]
     }
