@@ -52,7 +52,7 @@ export interface PlanData {
 // Template plan data
 export const TEMPLATE_PLAN: PlanData = {
   total_cost: 47.85,
-  total_time: 42,
+  total_time: 24,
   travel_time: 18,
   shopping_time: 24,
   total_savings: 12.5,
@@ -87,8 +87,8 @@ export const TEMPLATE_PLAN: PlanData = {
     {
       store_info: {
         store_id: "store_001",
-        name: "Woolworths Sydney CBD",
-        address: "123 George Street, Sydney NSW 2000",
+        name: "Woolworths Town Hall",
+        address: "Shop 1248/Cnr Park Street &, George St, Sydney NSW 2000",
         retailer_id: "woolworths",
       },
       items: [
@@ -121,8 +121,8 @@ export const TEMPLATE_PLAN: PlanData = {
     {
       store_info: {
         store_id: "store_002",
-        name: "Coles Pitt Street",
-        address: "456 Pitt Street, Sydney NSW 2000",
+        name: "Coles World Square",
+        address: "650 George St, Sydney NSW 2000",
         retailer_id: "coles",
       },
       items: [
@@ -155,8 +155,8 @@ export const TEMPLATE_PLAN: PlanData = {
     {
       store_info: {
         store_id: "store_003",
-        name: "ALDI Martin Place",
-        address: "789 Martin Place, Sydney NSW 2000",
+        name: "ALDI Oxford Village",
+        address: "73 Oxford St, Darlinghurst NSW 2010",
         retailer_id: "aldi",
       },
       items: [

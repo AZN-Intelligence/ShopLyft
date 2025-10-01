@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import aldiBg from "../assets/aldi-bg.png";
+import colesBg from "../assets/coles-bg.png";
+import woolworthBg from "../assets/woolworth-bg.webp";
 
 interface SupermarketIconProps {
   retailerId: string;
@@ -25,9 +28,13 @@ const SupermarketIcon = ({ retailerId, size = "md" }: SupermarketIconProps) => {
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className={`${getSizeClasses()} bg-green-500 rounded-full flex items-center justify-center`}
+            className={`${getSizeClasses()} bg-white rounded-full overflow-hidden`}
           >
-            <span className="text-white font-bold text-sm">W</span>
+            <img
+              src={woolworthBg}
+              alt="Woolworths"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         );
       case "coles":
@@ -36,9 +43,13 @@ const SupermarketIcon = ({ retailerId, size = "md" }: SupermarketIconProps) => {
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className={`${getSizeClasses()} bg-red-500 rounded-full flex items-center justify-center`}
+            className={`${getSizeClasses()} rounded-full overflow-hidden`}
           >
-            <span className="text-white font-bold text-sm">C</span>
+            <img
+              src={colesBg}
+              alt="Coles"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         );
       case "aldi":
@@ -47,9 +58,13 @@ const SupermarketIcon = ({ retailerId, size = "md" }: SupermarketIconProps) => {
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className={`${getSizeClasses()} bg-blue-500 rounded-full flex items-center justify-center`}
+            className={`${getSizeClasses()} rounded-full overflow-hidden`}
           >
-            <span className="text-white font-bold text-sm">A</span>
+            <img
+              src={aldiBg}
+              alt="ALDI"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         );
       default:
