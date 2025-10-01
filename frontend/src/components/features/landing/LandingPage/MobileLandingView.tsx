@@ -1,6 +1,6 @@
-import CardContainer from "../CardContainer";
+import CardContainer from "../../../shared/layout/CardContainer";
 import AnimatedHeadline from "./AnimatedHeadline";
-import ShoppingCartIcon from "../ShoppingListForm/ShoppingCartIcon";
+import ShoppingCartIcon from "../../shopping/ShoppingCartIcon";
 import LandingContent from "./LandingContent";
 import GetStartedButton from "./GetStartedButton";
 
