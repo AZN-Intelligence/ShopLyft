@@ -1,20 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface FloatingMemoProps {
-  onSend: (text: string) => void;
+  onSend: (text: string, location: string) => void;
 }
 
 function FloatingMemo({ onSend }: FloatingMemoProps) {
   const [text, setText] = useState("");
+  const [location, setLocation] = useState("");
   const [isFlying, setIsFlying] = useState(false);
+  const [isLocationLoading, setIsLocationLoading] = useState(true);
+  const [isEditingLocation, setIsEditingLocation] = useState(false);
+
+  // Get user's current location on component mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          // Reverse geocoding to get address (simplified - in real app you'd use a geocoding service)
+          setLocation(
+            `Current Location (${latitude.toFixed(4)}, ${longitude.toFixed(4)})`
+          );
+          setIsLocationLoading(false);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          setLocation("");
+          setIsLocationLoading(false);
+        }
+      );
+    } else {
+      setLocation("");
+      setIsLocationLoading(false);
+    }
+  }, []);
 
   const handleSubmit = () => {
-    if (text.trim()) {
+    if (text.trim() && location.trim()) {
       setIsFlying(true);
       setTimeout(() => {
-        onSend(text);
+        onSend(text, location);
         setText("");
+        setLocation("");
         setIsFlying(false);
       }, 1800); // Reduced to 1.8 seconds for faster animation
     }
@@ -74,6 +102,45 @@ function FloatingMemo({ onSend }: FloatingMemoProps) {
                 ))}
               </div>
 
+              {/* Location Field */}
+              <div className="absolute top-10 left-20 right-10 z-10">
+                <div className="flex items-center space-x-2">
+                  <span className="text-orange-600 font-semibold text-sm">
+                    📍
+                  </span>
+                  {isEditingLocation ? (
+                    <input
+                      type="text"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      onBlur={() => setIsEditingLocation(false)}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          setIsEditingLocation(false);
+                        }
+                      }}
+                      className="bg-transparent border-none outline-none text-orange-800 font-mono text-sm flex-1 z-20"
+                      placeholder="Enter your location..."
+                      autoFocus
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      onClick={() => setIsEditingLocation(true)}
+                      className="bg-transparent border-none outline-none text-orange-800 font-mono text-sm flex-1 hover:bg-orange-100 rounded px-1 py-0.5 transition-colors z-20 cursor-pointer"
+                      placeholder={
+                        isLocationLoading
+                          ? "Loading location..."
+                          : "Click to set your location"
+                      }
+                      readOnly={!isEditingLocation}
+                    />
+                  )}
+                </div>
+              </div>
+
               {/* Text Input */}
               <textarea
                 value={text}
@@ -82,7 +149,7 @@ function FloatingMemo({ onSend }: FloatingMemoProps) {
                 placeholder={
                   "Write your shopping list here...\n\nExample:\n• 2L milk\n• Bread\n• 1kg chicken breast\n• Tomatoes\n• Rice"
                 }
-                className="absolute inset-0 bg-transparent border-none outline-none resize-none p-10 pt-9.5 pl-20 text-orange-800 placeholder-orange-400 font-mono text-xl leading-9"
+                className="absolute inset-0 bg-transparent border-none outline-none resize-none p-10 pt-16 pl-20 text-orange-800 placeholder-orange-400 font-mono text-xl leading-9 z-0"
                 style={{
                   lineHeight: "1.5rem",
                 }}
@@ -99,11 +166,11 @@ function FloatingMemo({ onSend }: FloatingMemoProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleSubmit}
-              disabled={!text.trim()}
+              disabled={!text.trim() || !location.trim()}
               className="absolute -bottom-6 -right-6 bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 rotate-90 scale-y-[-1]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -198,7 +265,20 @@ function FloatingMemo({ onSend }: FloatingMemoProps) {
                     ></div>
                   ))}
                 </div>
-                <div className="absolute inset-0 p-10 pl-20 text-orange-800 font-mono text-xl leading-9 whitespace-pre-wrap">
+                {/* Location in absorption effect */}
+                <div className="absolute top-10 left-20 right-10">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-orange-600 font-semibold text-sm">
+                      📍
+                    </span>
+                    <span className="text-orange-800 font-mono text-sm">
+                      {location}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Text in absorption effect */}
+                <div className="absolute inset-0 p-10 pt-16 pl-20 text-orange-800 font-mono text-xl leading-9 whitespace-pre-wrap">
                   {text}
                 </div>
                 <div className="absolute left-8 top-16 w-3 h-3 bg-gray-300 rounded-full opacity-60"></div>
