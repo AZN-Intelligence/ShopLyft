@@ -154,9 +154,27 @@ class RouteItem(BaseModel):
 class StoreBasket(BaseModel):
     store_info: RouteStore
     items: List[RouteItem]
+    links: List[str] = Field(default_factory=list, description="Product URLs for this store")
     subtotal: float
-    click_collect_eligible: bool
-    min_spend_required: float
+    click_collect_available: bool = Field(..., description="Whether click & collect is available")
+    min_spend_met: bool = Field(..., description="Whether minimum spend requirement is met")
+
+class StartingLocation(BaseModel):
+    address: str = Field(..., description="Starting address")
+    coordinates: Location = Field(..., description="Starting coordinates")
+
+class RouteSegment(BaseModel):
+    from_store_id: Optional[str] = Field(None, description="Starting store ID")
+    to_store_id: str = Field(..., description="Destination store ID")
+    distance_km: float = Field(..., description="Distance in kilometers")
+    travel_time_min: float = Field(..., description="Travel time in minutes")
+    travel_method: str = Field(default="walking", description="Method of travel")
+
+class OptimizationDetails(BaseModel):
+    price_component: float = Field(..., description="Price optimization component")
+    time_component: float = Field(..., description="Time optimization component")
+    total_items: int = Field(..., description="Total number of items")
+    stores_count: int = Field(..., description="Number of stores in route")
 
 class ShoppingPlan(BaseModel):
     plan_id: Optional[str] = Field(None, description="Unique plan identifier")
@@ -164,9 +182,14 @@ class ShoppingPlan(BaseModel):
     total_time: float = Field(..., description="Total time in minutes")
     travel_time: float = Field(..., description="Travel time in minutes")
     shopping_time: float = Field(..., description="Shopping time in minutes")
-    num_stores: int = Field(..., description="Number of stores to visit")
+    total_savings: float = Field(..., description="Total savings compared to single store")
     route_score: float = Field(..., description="Optimization score")
-    store_baskets: List[StoreBasket] = Field(..., description="Items organized by store")
+    starting_location: StartingLocation = Field(..., description="Starting location details")
+    stores: List[StoreBasket] = Field(..., description="Items organized by store (frontend alias)")
+    route_segments: List[RouteSegment] = Field(..., description="Route segments between stores")
+    optimization_details: OptimizationDetails = Field(..., description="Optimization breakdown")
+    num_stores: int = Field(..., description="Number of stores to visit")
+    store_baskets: List[StoreBasket] = Field(..., description="Items organized by store (backend alias)")
     generated_at: Optional[datetime] = Field(None, description="Plan generation timestamp")
 
 class OptimizationRequest(BaseModel):
