@@ -3,18 +3,21 @@ import { motion } from "framer-motion";
 import DesktopLandingContent from "./DesktopLandingContent";
 import MobileLandingContent from "./MobileLandingContent";
 import FloatingMemo from "../LandingSection/FloatingMemo";
+import { useOptimization } from "../../hooks/useOptimization";
+import { type OptimizationRequest } from "../../services/api";
 
 function NewLandingPage() {
-  const [shoppingList, setShoppingList] = useState<string>("");
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleSendList = (text: string, location: string) => {
-    setShoppingList(text);
+  const { optimizeShoppingPlan } = useOptimization();
+
+  const handleSendList = async (text: string, location: string) => {
     setIsAnimating(true);
     console.log("Shopping list submitted:", text, "Location:", location);
+
     // Navigate to loading screen after animation completes
-    setTimeout(() => {
-      // This will be handled by the parent component
+    setTimeout(async () => {
+      // Dispatch event to App.tsx to show loading screen
       window.dispatchEvent(
         new CustomEvent("navigateToLoading", {
           detail: {
@@ -23,6 +26,42 @@ function NewLandingPage() {
           },
         })
       );
+
+      try {
+        const optimizationRequest: OptimizationRequest = {
+          grocery_list: text,
+          location: location,
+          max_stores: 3,
+          time_weight: 0.2,
+          price_weight: 0.8,
+        };
+
+        const result = await optimizeShoppingPlan(optimizationRequest);
+
+        if (result.success) {
+          // Navigate to plan layout with the optimized data
+          window.dispatchEvent(
+            new CustomEvent("navigateToPlan", {
+              detail: {
+                shoppingList: text,
+                location: location,
+                planData: result.plan,
+              },
+            })
+          );
+        }
+      } catch (error) {
+        console.error("Optimization failed:", error);
+        // Error state is handled by the useOptimization hook
+        // Dispatch error event to App.tsx
+        window.dispatchEvent(
+          new CustomEvent("optimizationError", {
+            detail: {
+              error: error,
+            },
+          })
+        );
+      }
     }, 1800);
   };
 
