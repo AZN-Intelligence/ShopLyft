@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { type PlanData, TEMPLATE_PLAN } from "./planTemplate";
 import PlanHeader from "./PlanHeader";
 import RoutePlan from "./RoutePlan";
 import RouteMap from "./RouteMap";
 import MobileToggle from "./MobileToggle";
+import JumpingCharacter from "./JumpingCharacter";
 
 interface PlanLayoutProps {
   planData?: PlanData;
@@ -16,6 +17,25 @@ function PlanLayout({
   isLoading = false,
 }: PlanLayoutProps) {
   const [isMapExpanded, setIsMapExpanded] = useState(false);
+  const [showJumpingCharacter, setShowJumpingCharacter] = useState(false);
+
+  // Trigger character animation when component mounts (plan is loaded)
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setShowJumpingCharacter(true);
+
+        // Hide character after 4.5 seconds (to match animation duration)
+        const hideTimer = setTimeout(() => {
+          setShowJumpingCharacter(false);
+        }, 4500);
+
+        return () => clearTimeout(hideTimer);
+      }, 500); // Small delay after plan loads
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex justify-center">
@@ -82,6 +102,12 @@ function PlanLayout({
             onMapExpand={() => setIsMapExpanded(!isMapExpanded)}
           />
         </div>
+
+        {/* Jumping Character - appears on all layouts */}
+        <JumpingCharacter
+          isVisible={showJumpingCharacter}
+          onAnimationComplete={() => setShowJumpingCharacter(false)}
+        />
       </motion.div>
     </div>
   );

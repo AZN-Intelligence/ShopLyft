@@ -55,12 +55,40 @@ function showSlideOutNotification(message) {
       transition: right 0.3s ease-in-out;
     ">
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 24px;">✅</div>
+        <div style="
+          width: 48px; 
+          height: 48px; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center;
+          animation: bounce 0.6s ease-in-out;
+        ">
+          <img src="${chrome.runtime.getURL("shoplyfter-jump.png")}" 
+               alt="ShopLyfter" 
+               style="
+                 width: 10vh; 
+                 height: 10vh; 
+                 object-fit: contain;
+                 animation: wiggle 1s ease-in-out infinite;
+               ">
+        </div>
         <div>
           <div style="font-weight: 600; font-size: 16px; color: #f97316;">ShopLyft</div>
           <div style="font-size: 14px; color: #666;">${message}</div>
         </div>
       </div>
+      <style>
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-10px); }
+          60% { transform: translateY(-5px); }
+        }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(-3deg) scale(1.05); }
+          75% { transform: rotate(3deg) scale(1.05); }
+        }
+      </style>
     </div>
   `;
 
