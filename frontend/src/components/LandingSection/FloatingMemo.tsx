@@ -40,7 +40,21 @@ function FloatingMemo({ onSend }: FloatingMemoProps) {
     if (text.trim() && location.trim()) {
       setIsFlying(true);
       setTimeout(() => {
-        onSend(text, location);
+        // Process location to extract coordinates if it's in the "Current Location (lat, lng)" format
+        let processedLocation = location;
+
+        // Check if location is in the format "Current Location (lat, lng)"
+        const coordinateMatch = location.match(
+          /Current Location \((-?\d+\.?\d*), (-?\d+\.?\d*)\)/
+        );
+        if (coordinateMatch) {
+          const lat = coordinateMatch[1];
+          const lng = coordinateMatch[2];
+          // Send coordinates in a format the backend can easily parse
+          processedLocation = `${lat},${lng}`;
+        }
+
+        onSend(text, processedLocation);
         setText("");
         setLocation("");
         setIsFlying(false);

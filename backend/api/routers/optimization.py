@@ -1576,9 +1576,23 @@ async def optimize_shopping_plan(request: OptimizationRequest):
         single_store_cost = calculate_single_store_baseline(price_dataset, parsed_list.parsed_products)
         total_savings = max(0.0, single_store_cost - optimal_route["total_price"])
         
-        # Create starting location
+        # Create starting location with proper address formatting
+        # If location is coordinates, use them directly for Google Maps compatibility
+        display_address = request.location
+        if "," in request.location and len(request.location.split(",")) == 2:
+            # This looks like coordinates, use them directly for Google Maps
+            try:
+                lat, lng = request.location.split(",")
+                lat_f = float(lat.strip())
+                lng_f = float(lng.strip())
+                # Use coordinates directly for Google Maps compatibility
+                display_address = f"{lat_f},{lng_f}"
+            except ValueError:
+                # If parsing fails, use original location
+                display_address = request.location
+        
         starting_location = StartingLocation(
-            address=request.location,
+            address=display_address,
             coordinates=Location(lat=user_location["lat"], lng=user_location["lng"])
         )
         

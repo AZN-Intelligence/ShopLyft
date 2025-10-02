@@ -8,6 +8,54 @@ interface RouteMapProps {
 }
 
 function RouteMap({ planData, isExpanded, onExpand }: RouteMapProps) {
+  // Construct waypoints with validation
+  const constructWaypoints = () => {
+    if (!planData.stores || planData.stores.length <= 1) {
+      return ""; // No waypoints needed if only one store or no stores
+    }
+
+    // Get all stores except the last one (which is the destination)
+    const waypointStores = planData.stores.slice(0, -1);
+
+    // Filter out any stores with invalid addresses and clean them
+    const validWaypoints = waypointStores
+      .filter(
+        (store) => store.store_info?.address && store.store_info.address.trim()
+      )
+      .map((store) => {
+        // Clean the address and encode it properly
+        const cleanAddress = store.store_info.address
+          .trim()
+          .replace(/\s+/g, " "); // Replace multiple spaces with single space
+        // Don't remove special characters as Google Maps can handle most of them
+        return encodeURIComponent(cleanAddress);
+      });
+
+    // Google Maps Embed API supports up to 23 waypoints
+    const limitedWaypoints = validWaypoints.slice(0, 23);
+
+    return limitedWaypoints.length > 0 ? limitedWaypoints.join("|") : "";
+  };
+
+  const waypoints = constructWaypoints();
+  const waypointsParam = waypoints ? `&waypoints=${waypoints}` : "";
+
+  // Debug logging to help identify issues
+  console.log("RouteMap Debug:", {
+    storesCount: planData.stores?.length || 0,
+    waypoints: waypoints,
+    waypointsLength: waypoints.length,
+    origin: planData.starting_location?.address,
+    destination:
+      planData.stores?.[planData.stores.length - 1]?.store_info?.address,
+    allStoreAddresses: planData.stores?.map((s) => s.store_info?.address),
+    finalMapUrl: `https://www.google.com/maps/embed/v1/directions?key=***&origin=${encodeURIComponent(
+      planData.starting_location.address
+    )}&destination=${encodeURIComponent(
+      planData.stores[planData.stores.length - 1].store_info.address
+    )}${waypointsParam}&mode=walking`,
+  });
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between items-center mb-4">
@@ -43,10 +91,12 @@ function RouteMap({ planData, isExpanded, onExpand }: RouteMapProps) {
             planData.starting_location.address
           )}&destination=${encodeURIComponent(
             planData.stores[planData.stores.length - 1].store_info.address
-          )}&waypoints=${planData.stores
-            .slice(0, -1)
-            .map((store) => encodeURIComponent(store.store_info.address))
-            .join("|")}&mode=walking`}
+          )}${waypointsParam}&mode=walking`}
+          onError={() => {
+            console.error(
+              "Google Maps iframe failed to load, possibly due to waypoints issue"
+            );
+          }}
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -107,10 +157,12 @@ function RouteMap({ planData, isExpanded, onExpand }: RouteMapProps) {
                   planData.starting_location.address
                 )}&destination=${encodeURIComponent(
                   planData.stores[planData.stores.length - 1].store_info.address
-                )}&waypoints=${planData.stores
-                  .slice(0, -1)
-                  .map((store) => encodeURIComponent(store.store_info.address))
-                  .join("|")}&mode=walking`}
+                )}${waypointsParam}&mode=walking`}
+                onError={() => {
+                  console.error(
+                    "Google Maps expanded iframe failed to load, possibly due to waypoints issue"
+                  );
+                }}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

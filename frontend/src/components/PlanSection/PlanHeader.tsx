@@ -71,7 +71,7 @@ function PlanHeader({ planData, isLoading }: PlanHeaderProps) {
         <div className="grid grid-cols-2 gap-3">
           <div className="text-center p-2 bg-orange-50 rounded">
             <div className="text-orange-600 font-semibold">
-              {isLoading ? "..." : `${planData.total_time} min`}
+              {isLoading ? "..." : `${planData.total_time.toFixed(2)} min`}
             </div>
             <div className="text-orange-500 text-xs">Total Time</div>
           </div>
@@ -81,19 +81,22 @@ function PlanHeader({ planData, isLoading }: PlanHeaderProps) {
             onClick={() => {
               // Collect all links from all stores and dispatch single event
               const allLinks: string[] = [];
-              planData.stores.forEach(store => {
+              planData.stores.forEach((store) => {
                 if (store.links) {
                   allLinks.push(...store.links);
                 }
               });
-              
+
               // Remove duplicates to prevent adding same product multiple times
               const uniqueLinks = [...new Set(allLinks)];
-              
-              console.log('[ShopLyft] Add All to Cart clicked with links:', uniqueLinks);
+
+              console.log(
+                "[ShopLyft] Add All to Cart clicked with links:",
+                uniqueLinks
+              );
               window.dispatchEvent(
-                new CustomEvent('shoplyft-add-to-cart', {
-                  detail: { links: uniqueLinks }
+                new CustomEvent("shoplyft-add-to-cart", {
+                  detail: { links: uniqueLinks },
                 })
               );
             }}
