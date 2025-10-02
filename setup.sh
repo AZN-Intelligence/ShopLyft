@@ -54,6 +54,51 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Collect API keys from user
+collect_api_keys() {
+    print_header "API Keys Configuration"
+    
+    print_info "ShopLyft requires API keys for full functionality:"
+    echo -e "• ${YELLOW}OpenAI API Key${NC}: For AI-powered shopping list parsing and optimization"
+    echo -e "• ${YELLOW}Google Maps API Key${NC}: For route visualization and directions"
+    
+    echo -e "\n${CYAN}You can skip this step and configure keys later in the .env files${NC}"
+    echo -e "${YELLOW}Do you want to configure API keys now? (y/N)${NC}"
+    read -r configure_keys
+    
+    if [[ "$configure_keys" =~ ^[Yy]$ ]]; then
+        # Collect OpenAI API Key
+        echo -e "\n${BLUE}Enter your OpenAI API Key:${NC}"
+        echo -e "${CYAN}(Get one at: https://platform.openai.com/api-keys)${NC}"
+        read -r -s OPENAI_KEY
+        
+        if [ -n "$OPENAI_KEY" ]; then
+            print_success "OpenAI API Key collected"
+        else
+            print_warning "No OpenAI API Key provided - you'll need to add it later"
+            OPENAI_KEY="your_openai_api_key_here"
+        fi
+        
+        # Collect Google Maps API Key
+        echo -e "\n${BLUE}Enter your Google Maps API Key:${NC}"
+        echo -e "${CYAN}(Get one at: https://developers.google.com/maps/documentation/embed/get-api-key)${NC}"
+        read -r -s GOOGLE_MAPS_KEY
+        
+        if [ -n "$GOOGLE_MAPS_KEY" ]; then
+            print_success "Google Maps API Key collected"
+        else
+            print_warning "No Google Maps API Key provided - you'll need to add it later"
+            GOOGLE_MAPS_KEY="your_google_maps_api_key_here"
+        fi
+        
+        print_success "API keys configuration complete!"
+    else
+        print_info "Skipping API key configuration - using placeholder values"
+        OPENAI_KEY="your_openai_api_key_here"
+        GOOGLE_MAPS_KEY="your_google_maps_api_key_here"
+    fi
+}
+
 # Check prerequisites
 check_prerequisites() {
     print_header "Checking Prerequisites"
@@ -125,6 +170,47 @@ setup_backend() {
     print_step "Installing Python dependencies..."
     pip install -r requirements.txt
     
+    print_step "Setting up connectonion (AI service)..."
+    if command_exists connectonion; then
+        print_success "Connectonion already installed globally"
+    else
+        print_info "Installing connectonion for AI-powered optimization..."
+        pip install connectonion>=0.0.4
+    fi
+    
+    # Verify connectonion installation
+    print_step "Verifying connectonion installation..."
+    if python -c "import connectonion; print('Connectonion version:', connectonion.__version__)" 2>/dev/null; then
+        print_success "Connectonion successfully installed and verified"
+    else
+        print_warning "Connectonion installation may have issues - please check manually"
+    fi
+    
+    print_step "Creating backend environment configuration..."
+    if [ ! -f .env ]; then
+        print_warning "Creating backend .env file..."
+        cat > .env << EOF
+# ShopLyft Backend Environment Variables
+OPENAI_API_KEY=${OPENAI_KEY}
+API_HOST=0.0.0.0
+API_PORT=8000
+LOG_LEVEL=info
+CONNECTONION_API_KEY=${OPENAI_KEY}
+
+# Database Configuration (if needed)
+# DATABASE_URL=sqlite:///./shoplyft.db
+
+# Security Settings
+# SECRET_KEY=your_secret_key_here
+# ALGORITHM=HS256
+# ACCESS_TOKEN_EXPIRE_MINUTES=30
+EOF
+        print_success "Backend .env file created"
+    else
+        print_info "Backend .env file already exists - skipping creation"
+        print_warning "Please manually update API keys in backend/.env if needed"
+    fi
+    
     print_success "Backend setup complete!"
     
     # Return to project root
@@ -140,18 +226,27 @@ setup_frontend() {
     print_step "Installing Node.js dependencies..."
     npm install
     
-    print_step "Checking for environment variables..."
+    print_step "Creating frontend environment configuration..."
     if [ ! -f .env ]; then
-        print_warning "Creating .env file with default values..."
+        print_warning "Creating frontend .env file..."
         cat > .env << EOF
 # ShopLyft Frontend Environment Variables
 VITE_API_BASE_URL=http://localhost:8000
-VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+VITE_GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_KEY}
 VITE_MODE=dev
+
+# Optional: Analytics and Monitoring
+# VITE_ANALYTICS_ID=your_analytics_id_here
+# VITE_SENTRY_DSN=your_sentry_dsn_here
+
+# Optional: Feature Flags
+# VITE_ENABLE_DEBUG=false
+# VITE_ENABLE_MOCK_DATA=false
 EOF
-        print_info "Please update .env file with your Google Maps API key"
+        print_success "Frontend .env file created"
     else
-        print_success ".env file already exists"
+        print_info "Frontend .env file already exists - skipping creation"
+        print_warning "Please manually update API keys in frontend/.env if needed"
     fi
     
     print_success "Frontend setup complete!"
@@ -206,8 +301,17 @@ echo "🚀 Starting ShopLyft Full Stack..."
 
 # Function to handle cleanup
 cleanup() {
+    echo ""
     echo "🛑 Shutting down services..."
-    kill $BACKEND_PID $FRONTEND_PID 2>/dev/null
+    if [ ! -z "$BACKEND_PID" ]; then
+        echo "   Stopping backend (PID: $BACKEND_PID)..."
+        kill $BACKEND_PID 2>/dev/null
+    fi
+    if [ ! -z "$FRONTEND_PID" ]; then
+        echo "   Stopping frontend (PID: $FRONTEND_PID)..."
+        kill $FRONTEND_PID 2>/dev/null
+    fi
+    echo "✅ All services stopped"
     exit 0
 }
 
@@ -220,6 +324,7 @@ cd backend
 source .venv/bin/activate
 python start_api.py &
 BACKEND_PID=$!
+echo $BACKEND_PID > ../backend.pid
 cd ..
 
 # Wait a moment for backend to start
@@ -230,6 +335,7 @@ echo "🌐 Starting frontend server..."
 cd frontend
 npm run dev &
 FRONTEND_PID=$!
+echo $FRONTEND_PID > ../frontend.pid
 cd ..
 
 echo ""
@@ -238,12 +344,58 @@ echo "📡 Backend API: http://localhost:8000"
 echo "📚 API Docs: http://localhost:8000/docs"
 echo "🌐 Frontend: http://localhost:5173"
 echo ""
-echo "Press Ctrl+C to stop all services"
+echo "💡 To stop services:"
+echo "   • Press Ctrl+C in this terminal"
+echo "   • Or run './stop-all.sh' from another terminal"
+echo ""
 
 # Wait for processes
 wait $BACKEND_PID $FRONTEND_PID
 EOF
     chmod +x start-all.sh
+
+    # Stop script
+    print_step "Creating stop script..."
+    cat > stop-all.sh << 'EOF'
+#!/bin/bash
+echo "🛑 Stopping ShopLyft services..."
+
+stopped_any=false
+
+# Stop backend if running
+if [ -f backend.pid ]; then
+    BACKEND_PID=$(cat backend.pid)
+    if kill -0 $BACKEND_PID 2>/dev/null; then
+        echo "   Stopping backend (PID: $BACKEND_PID)..."
+        kill $BACKEND_PID 2>/dev/null
+        stopped_any=true
+    fi
+    rm -f backend.pid
+fi
+
+# Stop frontend if running
+if [ -f frontend.pid ]; then
+    FRONTEND_PID=$(cat frontend.pid)
+    if kill -0 $FRONTEND_PID 2>/dev/null; then
+        echo "   Stopping frontend (PID: $FRONTEND_PID)..."
+        kill $FRONTEND_PID 2>/dev/null
+        stopped_any=true
+    fi
+    rm -f frontend.pid
+fi
+
+# Also try to kill by process name as fallback
+pkill -f "python start_api.py" 2>/dev/null && stopped_any=true
+pkill -f "npm run dev" 2>/dev/null && stopped_any=true
+pkill -f "vite" 2>/dev/null && stopped_any=true
+
+if [ "$stopped_any" = true ]; then
+    echo "✅ ShopLyft services stopped"
+else
+    echo "ℹ️  No ShopLyft services were running"
+fi
+EOF
+    chmod +x stop-all.sh
     
     print_success "Startup scripts created!"
 }
@@ -255,7 +407,7 @@ test_installations() {
     # Test backend
     print_step "Testing backend setup..."
     cd backend
-    if source .venv/bin/activate && python -c "import fastapi, uvicorn, pydantic; print('Backend dependencies OK')"; then
+    if source .venv/bin/activate && python -c "import fastapi, uvicorn, pydantic, connectonion; print('Backend dependencies OK')"; then
         print_success "Backend dependencies verified"
     else
         print_error "Backend dependency test failed"
@@ -305,6 +457,7 @@ main() {
     
     # Run setup steps
     check_prerequisites
+    collect_api_keys
     setup_backend
     setup_frontend
     setup_extension
@@ -320,6 +473,12 @@ main() {
     echo -e "• ${YELLOW}./start-all.sh${NC}      - Start both backend and frontend"
     echo -e "• ${YELLOW}./start-backend.sh${NC}  - Start only backend API"
     echo -e "• ${YELLOW}./start-frontend.sh${NC} - Start only frontend web app"
+    echo -e "• ${YELLOW}./stop-all.sh${NC}       - Stop all running services"
+    
+    echo -e "\n${CYAN}How to Stop Services:${NC}"
+    echo -e "• ${GREEN}Ctrl+C${NC} in the terminal running ${YELLOW}./start-all.sh${NC}"
+    echo -e "• Or run ${YELLOW}./stop-all.sh${NC} from another terminal"
+    echo -e "• Individual services: ${GREEN}Ctrl+C${NC} in their respective terminals"
     
     echo -e "\n${CYAN}Access Points:${NC}"
     echo -e "• Frontend Web App: ${BLUE}http://localhost:5173${NC}"
@@ -327,9 +486,25 @@ main() {
     echo -e "• API Documentation: ${BLUE}http://localhost:8000/docs${NC}"
     
     echo -e "\n${CYAN}Next Steps:${NC}"
-    echo -e "1. Update ${YELLOW}frontend/.env${NC} with your Google Maps API key"
-    echo -e "2. Install the browser extension in Chrome (see instructions above)"
-    echo -e "3. Run ${YELLOW}./start-all.sh${NC} to start the development servers"
+    if [ "$OPENAI_KEY" = "your_openai_api_key_here" ] || [ "$GOOGLE_MAPS_KEY" = "your_google_maps_api_key_here" ]; then
+        echo -e "1. ${YELLOW}Configure API Keys:${NC}"
+        if [ "$OPENAI_KEY" = "your_openai_api_key_here" ]; then
+            echo -e "   • Update ${YELLOW}OPENAI_API_KEY${NC} in ${CYAN}backend/.env${NC}"
+        fi
+        if [ "$GOOGLE_MAPS_KEY" = "your_google_maps_api_key_here" ]; then
+            echo -e "   • Update ${YELLOW}VITE_GOOGLE_MAPS_API_KEY${NC} in ${CYAN}frontend/.env${NC}"
+        fi
+        echo -e "2. Install the browser extension in Chrome (see instructions above)"
+        echo -e "3. Run ${YELLOW}./start-all.sh${NC} to start the development servers"
+    else
+        echo -e "1. Install the browser extension in Chrome (see instructions above)"
+        echo -e "2. Run ${YELLOW}./start-all.sh${NC} to start the development servers"
+        echo -e "3. ${GREEN}API keys are already configured!${NC}"
+    fi
+    
+    echo -e "\n${CYAN}API Key Resources:${NC}"
+    echo -e "• OpenAI API: ${BLUE}https://platform.openai.com/api-keys${NC}"
+    echo -e "• Google Maps API: ${BLUE}https://developers.google.com/maps/documentation/embed/get-api-key${NC}"
     
     echo -e "\n${GREEN}Happy coding! 🚀${NC}"
 }

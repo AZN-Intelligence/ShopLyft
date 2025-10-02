@@ -1,247 +1,206 @@
-# 🛒 ShopLyft - AI Grocery Shopping Optimizer
+# ShopLyft - AI-Powered Grocery Shopping Optimization
 
-[![GitHub](https://img.shields.io/badge/GitHub-AZN--Intelligence%2FShopLyft-blue?logo=github)](https://github.com/AZN-Intelligence/ShopLyft)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://python.org)
-[![AI Framework](https://img.shields.io/badge/AI-ConnectOnion-orange)](https://connectonion.com)
+> **Transform your grocery shopping with AI-powered route optimization and automated cart management across Australian supermarkets.**
 
-An intelligent grocery shopping assistant that optimizes your shopping across **Woolworths**, **Coles**, and **ALDI** to maximize savings and minimize travel time. Built with advanced AI agent technology using the ConnectOnion framework.
+ShopLyft is a comprehensive platform that combines natural language processing, route optimization, and browser automation to revolutionize grocery shopping. Simply input your shopping list, and ShopLyft will find the best stores, optimize your route, and even add items to your cart automatically.
 
-## 🌟 Features
-- **🤖 Hybrid AI Architecture**: Clear separation of AI parsing and algorithmic optimization
-- **💰 Multi-Store Price Comparison**: Find the best deals across Australia's major supermarkets
-- **🗺️ Smart Route Planning**: Traveling Salesman algorithm for optimal store visiting order
-- **📱 Click & Collect Integration**: Automatic eligibility checking and cart optimization
-- **🔒 Strict Data Mapping**: Only uses pre-existing stores and products from JSON data
-- **📊 Savings Analysis**: Real-time calculation of savings vs single-store shopping
-- **⚡ Natural Language Input**: Simple text input like "milk, bread, eggs, location: Sydney CBD"
+## 🚀 Quick Start
 
-## 🚀 How It Works
+### One-Command Setup
 
-1. **Input**: Natural language shopping list + location
-2. **AI Parsing**: LLM maps user input to pre-existing products in products.json
-3. **Route Chooser**: Multi-part algorithmic optimization:
-   - Generate price dataset from all JSON files
-   - Generate all possible routes for all stores
-   - Score routes based on time (20%) and price (80%)
-   - Find optimal route with best score
-4. **Output**: Complete shopping plan with store route, item assignments, and savings calculation
+```bash
+# Clone the repository
+git clone <repository-url>
+cd ShopLyft
 
-```
-Input:  "Shopping list: milk, bread, eggs, bananas. Location: Sydney CBD"
-Output: Optimized plan visiting 2-3 stores, saving $3-8, 25-35 minutes total time
+# Run the automated setup script
+./setup.sh
 ```
 
-## 🛠️ Technology Stack
+The setup script will:
 
-- **AI Framework**: ConnectOnion for LLM-based natural language processing
-- **Optimization**: Pure algorithmic approach with TSP and combinatorics
-- **Data**: JSON database with strict mapping structure:
-  - **products.json**: Product definitions and aliases for AI parsing
-  - **stores.json**: Store locations and addresses for route planning
-  - **price_snapshots.json**: Current prices for cost optimization
-  - **retailer_catalog.json**: Product availability by retailer
-  - **retailers.json**: Retailer rules (Click & Collect, etc.)
-- **Language**: Python 3.8+ with comprehensive type hints and Pydantic models
-- **Architecture**: Hybrid approach - AI for parsing, algorithms for optimization
+- ✅ Check all prerequisites (Python 3.8+, Node.js 16+, npm, git)
+- ✅ Configure API keys interactively (OpenAI, Google Maps)
+- ✅ Set up backend with virtual environment and connectonion
+- ✅ Install frontend dependencies and configure environment
+- ✅ Create startup scripts for easy development
+- ✅ Test all installations and provide next steps
 
-## 🏗️ Architecture Overview
+### Manual Setup
 
-### Hybrid AI + Algorithms Approach
-The ShopLyft agent uses a **clear separation of concerns**:
+If you prefer manual setup, see the individual README files:
 
-1. **AI Parsing (LLM)**: 
-   - Maps natural language input to pre-existing products in `products.json`
-   - Uses ConnectOnion's `llm_do` with Pydantic models for structured output
-   - Strict validation ensures only valid canonical_ids are used
+- [Backend Setup](./backend/README.md) - FastAPI server with AI optimization
+- [Frontend Setup](./frontend/README.md) - React web application
+- [Extension Setup](./extension/README.md) - Chrome browser extension
 
-2. **Route Chooser (Pure Algorithms)**:
-   - **Price Dataset**: Generates (item, price, store) combinations from all JSON files
-   - **Route Generation**: Creates all possible store combinations using combinatorics
-   - **Route Scoring**: Balances cost (80%) vs time (20%) using Haversine distance
-   - **Optimal Route**: Selects best scoring route using TSP optimization
+## 🏗 Architecture Overview
 
-### Data Mapping Structure
-- **products.json**: Product definitions and aliases for AI parsing
-- **stores.json**: Store locations and addresses for route planning  
-- **price_snapshots.json**: Current prices for cost optimization
-- **retailer_catalog.json**: Product availability by retailer
-- **retailers.json**: Retailer rules (Click & Collect, etc.)
+```
+ShopLyft Platform
+├── 🌐 Frontend (React + TypeScript)     # User interface and shopping experience
+├── 📡 Backend (FastAPI + Python)       # AI optimization and API services
+└── 🔌 Extension (Chrome Extension)      # Automated cart management
+```
 
-## 📊 Performance Metrics
+### Core Components
 
-- **Average Savings**: 5-15% compared to single-store shopping
-- **Coverage**: 15 stores across Sydney CBD and inner suburbs
-- **Product Catalog**: 25 products across 5 major categories
-- **Optimization Speed**: Complete plans generated in 15-30 seconds
-- **Route Efficiency**: TSP algorithm for minimal travel time
-- **Data Integrity**: Strict validation ensures only pre-existing stores/products are used
+- **🤖 AI-Powered Optimization**: Natural language processing converts shopping lists to optimized routes
+- **🗺 Route Planning**: Multi-store optimization balancing cost, time, and convenience
+- **🛒 Cart Automation**: Browser extension automatically adds items across retailer websites
+- **📱 Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
-## 🏆 Hackathon Ready
+## 🎯 Features
 
-- ✅ **Innovation**: Hybrid AI architecture with clear separation of concerns
-- ✅ **Technical Complexity**: Multi-part route chooser with algorithmic optimization
-- ✅ **User Experience**: Natural language input, human-readable output
-- ✅ **Feasibility**: Production-ready architecture with strict data validation
-- ✅ **Presentation**: Clean code, extensive documentation, demo-ready
+### For Shoppers
+
+- **Natural Language Input**: Write shopping lists in plain English
+- **Smart Route Optimization**: Find the best combination of stores and routes
+- **Real-Time Savings**: See cost comparisons and savings opportunities
+- **One-Click Cart Management**: Automatically add all items to retailer carts
+- **Mobile-Friendly**: Optimized experience across all devices
+
+### For Developers
+
+- **Modern Tech Stack**: React 19, FastAPI, TypeScript, TailwindCSS
+- **AI Integration**: OpenAI-powered natural language processing
+- **Geospatial Services**: Google Maps integration for route visualization
+- **Browser Automation**: Chrome extension with cross-retailer support
+- **Comprehensive APIs**: RESTful endpoints with OpenAPI documentation
+
+## 🛠 Development
+
+### Start Development Servers
+
+```bash
+# Start both backend and frontend
+./start-all.sh
+
+# Or start individually
+./start-backend.sh    # Backend API on http://localhost:8000
+./start-frontend.sh   # Frontend app on http://localhost:5173
+```
+
+### Stop Development Servers
+
+```bash
+# Stop all services (from another terminal)
+./stop-all.sh
+
+# Or use Ctrl+C in the terminal running ./start-all.sh
+# Individual services can be stopped with Ctrl+C in their terminals
+```
+
+### Access Points
+
+- **Frontend Web App**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+
+## 🔑 API Keys Required
+
+ShopLyft requires two API keys for full functionality:
+
+### OpenAI API Key
+
+- **Purpose**: Powers AI-driven shopping list parsing and optimization
+- **Get Key**: https://platform.openai.com/api-keys
+- **Usage**: Natural language processing, product matching, route optimization
+
+### Google Maps API Key
+
+- **Purpose**: Route visualization and directions in the web app
+- **Get Key**: https://developers.google.com/maps/documentation/embed/get-api-key
+- **Usage**: Embedded maps, route display, store location services
+
+> 💡 **Tip**: The setup script will prompt you to enter these keys interactively, or you can add them later to the `.env` files.
+
+## 🏪 Supported Retailers
+
+- **🟢 Woolworths**: Australia's largest supermarket chain
+- **🔴 Coles**: Major competitor with extensive network
+- **🟡 ALDI**: Discount retailer with growing presence
+
+## 📋 Project Structure
+
+```
+ShopLyft/
+├── 📁 backend/          # FastAPI server and AI services
+├── 📁 frontend/         # React web application
+├── 📁 extension/        # Chrome browser extension
+├── 📁 data/            # Sample data and configurations
+├── 🚀 setup.sh         # Automated setup script
+├── ▶️ start-all.sh     # Start both servers
+├── ⏹️ stop-all.sh      # Stop all services
+├── ▶️ start-backend.sh # Start backend only
+└── ▶️ start-frontend.sh # Start frontend only
+```
+
+## 🔧 Environment Configuration
+
+After setup, configure your environment variables:
+
+### Backend (.env)
+
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+CONNECTONION_API_KEY=your_openai_api_key_here
+API_HOST=0.0.0.0
+API_PORT=8000
+```
+
+### Frontend (.env)
+
+```bash
+VITE_API_BASE_URL=http://localhost:8000
+VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+VITE_MODE=dev
+```
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**Setup Script Fails**
+
+```bash
+# Ensure you have required permissions
+chmod +x setup.sh
+
+# Check prerequisites
+python3 --version  # Should be 3.8+
+node --version      # Should be 16+
+npm --version
+```
+
+**API Keys Not Working**
+
+- Verify keys are correctly added to `.env` files
+- Check API key permissions and quotas
+- Restart servers after updating environment variables
+
+**Extension Not Loading**
+
+- Enable Chrome Developer Mode
+- Load unpacked extension from `extension/` folder
+- Check browser console for error messages
+
+### Get Help
+
+1. Check individual component README files for detailed troubleshooting
+2. Review server logs for specific error messages
+3. Verify all environment variables are properly configured
+4. Ensure all prerequisites are installed and up to date
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines and code of conduct.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-This project was built for DevSoc Flagship Hackathon 2025. Contributions welcome!
-
 ---
 
-# 👥 Team Setup Instructions
-
-*This section is for our hackathon team members to get the project running locally.*
-
-## 🔧 Local Development Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- Git installed
-- Terminal/Command line access
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/AZN-Intelligence/ShopLyft.git
-cd ShopLyft
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install ConnectOnion framework
-pip install --user --break-system-packages connectonion
-
-# Or if you prefer virtual environment:
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install connectonion
-```
-
-### 3. Authentication Setup
-
-```bash
-# Authenticate with ConnectOnion (this sets up your API key automatically)
-co auth
-```
-
-*Follow the prompts to authenticate. This will automatically configure your OpenOnion API key.*
-
-### 4. Verify Installation
-
-```bash
-# Test the agent
-python meta-agent/agent.py
-```
-
-### 5. Project Structure Overview
-
-```
-ShopLyft/
-├── meta-agent/
-│   ├── agent.py          # Main AI agent implementation
-│   ├── prompt.md         # System prompt for the agent
-│   ├── shoplyft_ai_agent.md # Agent specification
-│   └── connectoniondocumentation.md # ConnectOnion framework docs
-├── data/                 # JSON database with strict mapping
-│   ├── products.json     # Product definitions and aliases for AI parsing
-│   ├── stores.json       # Store locations and addresses for route planning
-│   ├── price_snapshots.json # Current prices for cost optimization
-│   ├── retailer_catalog.json # Product availability by retailer
-│   ├── retailers.json    # Retailer rules (Click & Collect, etc.)
-│   └── plans.json        # Generated shopping plans
-├── frontend/             # React frontend (optional)
-├── shoplyft_ai_agent_guide.md # Complete user guide
-├── shoplyft_project_prompt.md # Project specification
-├── requirements.txt      # Python dependencies
-└── README.md            # This file
-```
-
-## 🧪 Testing the Agent
-
-### Interactive Testing
-```bash
-python meta-agent/agent.py
-```
-
-Then try inputs like:
-- `"Shopping list: milk, bread, eggs. Location: -33.871, 151.206"`
-- `"Shopping list: pasta, sauce, cheese, chicken. Location: Sydney CBD"`
-- `"Shopping list: apples, bananas, yogurt. Location: Bondi Junction"`
-
-### Expected Output
-The agent should return:
-1. ✅ Valid Plan_v1 JSON structure
-2. ✅ Human-readable markdown summary
-3. ✅ Savings calculation vs single-store baseline
-4. ✅ Store route optimization
-5. ✅ Click & Collect eligibility
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**"ModuleNotFoundError: No module named 'connectonion'"**
-```bash
-pip install --user --break-system-packages connectonion
-```
-
-**"Authentication failed"**
-```bash
-co auth
-# Follow the authentication flow again
-```
-
-**"Maximum iterations reached"**
-- This is normal for complex shopping lists
-- The agent will still return a valid plan
-
-**"Items not found in catalog"**
-- Check your spelling
-- Try common aliases (e.g., "milk 2L" instead of "milk")
-
-### Debug Mode
-```bash
-# Run with debug output
-python -u meta-agent/agent.py
-```
-
-## 📝 Development Notes
-
-### Configuration
-- **Model**: `co/o4-mini` (managed by ConnectOnion)
-- **Max iterations**: 8 (reduced since main work is in algorithms)
-- **Optimization weights**: 20% time, 80% cost
-- **Max stores**: 3 (Woolworths, Coles, ALDI)
-- **Architecture**: Hybrid - AI for parsing, algorithms for optimization
-
-### Key Files to Understand
-1. `meta-agent/agent.py` - Main agent implementation with hybrid architecture
-2. `meta-agent/prompt.md` - System instructions for the AI
-3. `meta-agent/shoplyft_ai_agent.md` - Complete agent specification
-4. `data/*.json` - Database with strict mapping structure
-5. `shoplyft_ai_agent_guide.md` - Comprehensive user guide
-
-### Making Changes
-- **Add products**: Edit `data/products.json` and `data/retailer_catalog.json`
-- **Add stores**: Edit `data/stores.json`
-- **Modify pricing**: Edit `data/price_snapshots.json`
-- **Change AI behavior**: Edit `meta-agent/prompt.md`
-- **Update architecture**: Edit `meta-agent/agent.py` (hybrid AI + algorithms)
-
-## ✅ Ready to Demo!
-
-Once setup is complete, you should be able to:
-- Run the agent locally
-- Process shopping lists with location
-- Get optimized shopping plans with savings
-- Demonstrate route optimization across Sydney stores
-
-**Need help?** Ask the team or check the comprehensive guide in `shoplyft_ai_agent_guide.md`!
+**Built with ❤️ for smarter grocery shopping in Australia** 🇦🇺
