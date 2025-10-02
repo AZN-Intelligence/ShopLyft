@@ -79,13 +79,23 @@ function PlanHeader({ planData, isLoading }: PlanHeaderProps) {
           {/* Add All to Cart Button */}
           <button
             onClick={() => {
-              // Find and click all AddToCartButton buttons
-              const buttons = document.querySelectorAll(
-                "[data-shoplyft-add-to-cart]"
-              );
-              buttons.forEach((btn) => {
-                (btn as HTMLButtonElement).click();
+              // Collect all links from all stores and dispatch single event
+              const allLinks: string[] = [];
+              planData.stores.forEach(store => {
+                if (store.links) {
+                  allLinks.push(...store.links);
+                }
               });
+              
+              // Remove duplicates to prevent adding same product multiple times
+              const uniqueLinks = [...new Set(allLinks)];
+              
+              console.log('[ShopLyft] Add All to Cart clicked with links:', uniqueLinks);
+              window.dispatchEvent(
+                new CustomEvent('shoplyft-add-to-cart', {
+                  detail: { links: uniqueLinks }
+                })
+              );
             }}
             className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg flex flex-col items-center justify-center"
           >
