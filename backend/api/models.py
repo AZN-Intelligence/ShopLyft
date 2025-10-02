@@ -156,8 +156,8 @@ class StoreBasket(BaseModel):
     items: List[RouteItem]
     links: List[str] = Field(default_factory=list, description="Product URLs for this store")
     subtotal: float
-    click_collect_available: bool = Field(..., description="Whether click & collect is available")
-    min_spend_met: bool = Field(..., description="Whether minimum spend requirement is met")
+    click_collect_eligible: bool = Field(..., description="Whether click & collect is eligible")
+    min_spend_required: float = Field(..., description="Minimum spend requirement for click & collect")
 
 class StartingLocation(BaseModel):
     address: str = Field(..., description="Starting address")
@@ -191,6 +191,12 @@ class ShoppingPlan(BaseModel):
     num_stores: int = Field(..., description="Number of stores to visit")
     store_baskets: List[StoreBasket] = Field(..., description="Items organized by store (backend alias)")
     generated_at: Optional[datetime] = Field(None, description="Plan generation timestamp")
+    
+    class Config:
+        # Ensure all fields are included in serialization, even if they have default values
+        exclude_none = False
+        exclude_unset = False
+        exclude_defaults = False
 
 class OptimizationRequest(BaseModel):
     grocery_list: str = Field(..., description="Natural language grocery list")

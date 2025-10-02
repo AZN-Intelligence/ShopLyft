@@ -1568,8 +1568,8 @@ async def optimize_shopping_plan(request: OptimizationRequest):
                 items=route_items,
                 links=[],  # Will be populated below
                 subtotal=basket_data["subtotal"],
-                click_collect_available=meets_min_spend,
-                min_spend_met=meets_min_spend
+                click_collect_eligible=meets_min_spend,
+                min_spend_required=min_spend
             ))
         
         # Calculate total savings (compare to single most expensive store)
@@ -1617,6 +1617,14 @@ async def optimize_shopping_plan(request: OptimizationRequest):
             for basket in basket_list:
                 basket.links = []
         
+        # Debug: Print the data being used to create the shopping plan
+        print(f"[ShopLyft] Creating shopping plan with:")
+        print(f"  - total_savings: {total_savings}")
+        print(f"  - starting_location: {starting_location}")
+        print(f"  - route_segments: {len(route_segments)} segments")
+        print(f"  - optimization_details: {optimization_details}")
+        print(f"  - stores/store_baskets: {len(basket_list)} stores")
+        
         # Create shopping plan
         shopping_plan = ShoppingPlan(
             total_cost=optimal_route["total_price"],
@@ -1633,6 +1641,15 @@ async def optimize_shopping_plan(request: OptimizationRequest):
             store_baskets=basket_list,  # Backend compatibility
             generated_at=datetime.now(timezone.utc)
         )
+        
+        # Debug: Print the created shopping plan
+        print(f"[ShopLyft] Shopping plan created successfully:")
+        print(f"  - Plan has starting_location: {shopping_plan.starting_location is not None}")
+        print(f"  - Plan has route_segments: {len(shopping_plan.route_segments)} segments")
+        print(f"  - Plan has optimization_details: {shopping_plan.optimization_details is not None}")
+        print(f"  - Plan has total_savings: {shopping_plan.total_savings}")
+        print(f"  - Plan has stores: {len(shopping_plan.stores)} stores")
+        print(f"  - Plan has store_baskets: {len(shopping_plan.store_baskets)} baskets")
         
         return OptimizationResponse(
             plan=shopping_plan,

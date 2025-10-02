@@ -47,6 +47,10 @@ function JumpingCharacter({
             scale: 0.6,
             rotate: 20,
             opacity: 0,
+            transition: {
+              duration: 0.8,
+              ease: "easeIn",
+            },
           }}
           transition={{
             x: {
@@ -68,10 +72,6 @@ function JumpingCharacter({
               duration: 4,
               ease: "easeInOut",
               times: [0, 0.3, 0.7, 1],
-            },
-            exit: {
-              duration: 0.8,
-              ease: "easeIn",
             },
           }}
           onAnimationComplete={(definition) => {

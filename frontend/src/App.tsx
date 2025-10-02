@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import NewLandingPage from "./components/LandingSection/LandingPage";
 import PlanLayout from "./components/PlanSection/PlanLayout";
 import LoadingScreen from "./components/LoadingSection/LoadingScreen";
+import {
+  TEMPLATE_PLAN,
+  type PlanData,
+} from "./components/PlanSection/planTemplate";
 
 function App() {
   const [currentStep, setCurrentStep] = useState<
@@ -10,6 +14,7 @@ function App() {
   >("landing");
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const [loadingError, setLoadingError] = useState<string | null>(null);
+  const [planData, setPlanData] = useState<PlanData | null>(null);
 
   useEffect(() => {
     const handleNavigateToLoading = () => {
@@ -20,13 +25,11 @@ function App() {
 
     const handleNavigateToPlan = (event: CustomEvent) => {
       console.log("Plan data received:", event.detail);
-      // Store plan data for PlanLayout component
-      // You can use context, state, or localStorage to pass this data
+
+      // Store plan data in state for PlanLayout component
       if (event.detail.planData) {
-        localStorage.setItem(
-          "shoplyft_plan_data",
-          JSON.stringify(event.detail.planData)
-        );
+        setPlanData(event.detail.planData);
+        console.log("Plan data stored in state:", event.detail.planData);
       }
 
       // Trigger character exit animation
@@ -141,7 +144,7 @@ function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <PlanLayout />
+            <PlanLayout planData={TEMPLATE_PLAN} isLoading={false} />
           </motion.div>
         )}
       </AnimatePresence>
