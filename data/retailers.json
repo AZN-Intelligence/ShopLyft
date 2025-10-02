@@ -13,7 +13,7 @@
     {
       "retailer_id": "aldi",
       "display_name": "ALDI",
-      "click_collect": { "min_spend": 0.0, "currency": "AUD" }
+      "click_collect": { "min_spend": 2147483647, "currency": "AUD" }
     }
   ]
 }
