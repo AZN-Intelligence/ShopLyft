@@ -1,8 +1,39 @@
-# ShopLyft - AI-Powered Grocery Shopping Optimization
+# ShopLyft - AI-Powered Grocery Shopping Optimisation
 
-> **Transform your grocery shopping with AI-powered route optimization and automated cart management across Australian supermarkets.**
+> **Transform your grocery shopping with AI-powered route optimisation and automated cart management across Australian supermarkets.**
 
-ShopLyft is a comprehensive platform that combines natural language processing, route optimization, and browser automation to revolutionize grocery shopping. Simply input your shopping list, and ShopLyft will find the best stores, optimize your route, and even add items to your cart automatically.
+ShopLyft is a comprehensive platform that combines natural language processing, route optimisation, and browser automation to revolutionise grocery shopping. Simply input your shopping list, and ShopLyft will find the best stores, optimise your route, and even add items to your cart automatically.
+
+## ✨ Key Features
+
+### 🎯 **Core Functionality**
+
+- **📝 Natural Language Input**: Takes your shopping list in plain English
+- **📍 Location-Based Optimisation**: Uses your location to find nearby stores
+- **💰 Best Price Discovery**: Finds the best prices across major supermarkets (Woolworths, Coles, ALDI)
+- **🗺️ Optimal Route Generation**: Creates the most efficient shopping route
+- **🛒 Auto-Cart Integration**: Automatically adds items to supermarket websites for easy pickup
+
+### 🤖 **AI-Powered Intelligence**
+
+- **🧠 Agentic AI Processing**: Leverages ConnectOnion's AI for multi-step automation
+- **📊 Price vs Time Analysis**: Balances cost savings with travel time
+- **🎯 Smart Product Matching**: Matches your requests to actual store products
+- **⚡ Real-Time Optimisation**: Processes shopping lists in under 2 minutes
+
+### 🌐 **Seamless Integration**
+
+- **🔌 Browser Extension**: Chrome extension with Manifest V3 for auto-carting
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile devices
+- **🏪 Multi-Store Support**: Integrated with Australia's largest supermarket chains
+- **🚀 One-Click Setup**: Automated development environment setup
+
+### 💡 **Student-Focused Benefits**
+
+- **⏰ Time Saving**: Eliminates the need to compare prices manually
+- **💸 Money Saving**: Finds the best deals across multiple stores
+- **📋 Simplified Planning**: Converts weekly shopping into an optimised plan
+- **🎓 Student-Friendly**: Designed specifically for budget-conscious students
 
 ## 🚀 Quick Start
 
@@ -45,8 +76,8 @@ ShopLyft Platform
 
 ### Core Components
 
-- **🤖 AI-Powered Optimization**: Natural language processing converts shopping lists to optimized routes
-- **🗺 Route Planning**: Multi-store optimization balancing cost, time, and convenience
+- **🤖 AI-Powered Optimisation**: Natural language processing converts shopping lists to optimised routes
+- **🗺 Route Planning**: Multi-store optimisation balancing cost, time, and convenience
 - **🛒 Cart Automation**: Browser extension automatically adds items across retailer websites
 - **📱 Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
@@ -55,10 +86,10 @@ ShopLyft Platform
 ### For Shoppers
 
 - **Natural Language Input**: Write shopping lists in plain English
-- **Smart Route Optimization**: Find the best combination of stores and routes
+- **Smart Route Optimisation**: Find the best combination of stores and routes
 - **Real-Time Savings**: See cost comparisons and savings opportunities
 - **One-Click Cart Management**: Automatically add all items to retailer carts
-- **Mobile-Friendly**: Optimized experience across all devices
+- **Mobile-Friendly**: Optimised experience across all devices
 
 ### For Developers
 

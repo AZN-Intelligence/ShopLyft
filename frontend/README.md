@@ -1,14 +1,14 @@
 # ShopLyft Frontend
 
-A modern, minimal React web application for ShopLyft's grocery shopping optimization platform. Built with **React 19**, **TypeScript**, **TailwindCSS v4.1**, and **Framer Motion** for smooth animations and excellent user experience.
+A modern, minimal React web application for ShopLyft's grocery shopping optimisation platform. Built with **React 19**, **TypeScript**, **TailwindCSS v4.1**, and **Framer Motion** for smooth animations and excellent user experience.
 
 ## 🚀 Features
 
 - **Three-Stage User Flow**: Landing → Loading → Plan Display
-- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Responsive Design**: Optimised for desktop, tablet, and mobile
 - **Interactive Shopping List Input**: Paper-style memo with geolocation
 - **Real-Time Progress Tracking**: Animated loading with character feedback
-- **Route Visualization**: Google Maps integration with expandable modal
+- **Route Visualisation**: Google Maps integration with expandable modal
 - **Browser Extension Integration**: Automated cart management
 - **Error Handling**: Graceful fallbacks with user-friendly messages
 
@@ -20,7 +20,7 @@ A modern, minimal React web application for ShopLyft's grocery shopping optimiza
 - **TailwindCSS v4.1** — Utility-first CSS with custom orange color system
 - **Framer Motion** — Smooth animations and page transitions
 - **Axios** — HTTP client with request/response interceptors
-- **Google Maps API** — Route visualization and directions
+- **Google Maps API** — Route visualisation and directions
 
 ---
 
@@ -107,24 +107,24 @@ frontend/
 
 ## 🔌 Backend Integration
 
-The frontend communicates with the ShopLyft FastAPI backend for shopping optimization.
+The frontend communicates with the ShopLyft FastAPI backend for shopping optimisation.
 
 ### API Configuration
 
 - **Base URL**: `VITE_API_BASE_URL` (default: `http://localhost:8000`)
-- **Timeout**: 2 minutes for optimization requests
+- **Timeout**: 2 minutes for optimisation requests
 - **Client**: Axios with request/response interceptors
 
 ### Main Endpoint
 
-- `POST /api/v1/optimization/optimize` — Shopping plan optimization
+- `POST /api/v1/optimization/optimize` — Shopping plan optimisation
 
 ### Data Flow
 
 1. User inputs shopping list → `FloatingMemo.tsx`
-2. Triggers optimization → `useOptimization.ts` hook
+2. Triggers optimisation → `useOptimization.ts` hook
 3. API call → `api.ts` service
-4. Backend processing → AI parsing + route optimization
+4. Backend processing → AI parsing + route optimisation
 5. Response → Plan display in `PlanLayout.tsx`
 
 ---
@@ -134,9 +134,9 @@ The frontend communicates with the ShopLyft FastAPI backend for shopping optimiz
 ### Core Application Flow
 
 1. **App.tsx** — Main orchestrator managing three states: `landing` → `loading` → `roadmap`
-2. **LandingPage.tsx** — Handles user input and triggers optimization via custom events
-3. **LoadingScreen.tsx** — Shows progress during API optimization with character animations
-4. **PlanLayout.tsx** — Displays optimized shopping plan with responsive layouts
+2. **LandingPage.tsx** — Handles user input and triggers optimisation via custom events
+3. **LoadingScreen.tsx** — Shows progress during API optimisation with character animations
+4. **PlanLayout.tsx** — Displays optimised shopping plan with responsive layouts
 
 ### Key Component Interactions
 
@@ -198,12 +198,12 @@ App.tsx (State: landing → loading → roadmap)
 - **ShopLyfter Character**: Contextual animations for loading, errors, and success states
 - **Paper-Style Input**: Realistic memo pad with red margin lines and blue ruled lines
 - **Interactive Maps**: Google Maps integration with expandable modal view
-- **Real-Time Progress**: Visual feedback during optimization with progress indicators
+- **Real-Time Progress**: Visual feedback during optimisation with progress indicators
 
 ## ⚙️ Technical Features
 
 - **TypeScript**: End-to-end type safety with strict configuration
-- **Custom Hooks**: `useOptimization` for state management and API integration
+- **Custom Hooks**: `useOptimisation` for state management and API integration
 - **Event-Driven**: Component communication via `window.dispatchEvent`
 - **Error Boundaries**: Graceful error handling with fallback UI
 - **Template Data**: Development fallback when backend is unavailable
@@ -221,8 +221,8 @@ The frontend communicates with the ShopLyft browser extension via custom events:
 
 - `shoplyft-add-to-cart` — Triggered by `AddToCartButton.tsx` to automate cart management
 - `navigateToLoading` — Internal event for loading screen transition
-- `navigateToPlan` — Internal event for plan display with optimization data
-- `optimizationError` — Internal event for error handling and fallbacks
+- `navigateToPlan` — Internal event for plan display with optimisation data
+- `optimisationError` — Internal event for error handling and fallbacks
 
 ## 🚀 Development
 
@@ -244,4 +244,4 @@ npm run lint         # Run ESLint
 
 ---
 
-_This frontend provides a modern, accessible, and performant user interface for the ShopLyft grocery optimization platform._
+_This frontend provides a modern, accessible, and performant user interface for the ShopLyft grocery optimisation platform._

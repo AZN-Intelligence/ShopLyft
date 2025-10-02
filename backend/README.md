@@ -1,6 +1,6 @@
 # ShopLyft Backend API
 
-FastAPI-based backend service for AI-powered grocery shopping optimization across Australian supermarkets.
+FastAPI-based backend service for AI-powered grocery shopping optimisation across Australian supermarkets.
 
 ## 🏗 Project Structure
 
@@ -13,7 +13,7 @@ backend/
 └── api/
     ├── models.py        # Pydantic data models and schemas
     └── routers/
-        ├── optimization.py  # Shopping plan optimization endpoints
+        ├── optimization.py  # Shopping plan optimisation endpoints
         ├── products.py     # Product catalog management
         ├── stores.py       # Store location and search services
         ├── pricing.py      # Price comparison and snapshots
@@ -87,20 +87,20 @@ deactivate
 
 ## 📋 API Routes Overview
 
-### 🎯 Optimization Routes (`/api/v1/optimization`)
+### 🎯 Optimisation Routes (`/api/v1/optimization`)
 
-Core AI-powered shopping optimization functionality.
+Core AI-powered shopping optimisation functionality.
 
 | Method | Endpoint    | Description                                                   |
 | ------ | ----------- | ------------------------------------------------------------- |
 | `POST` | `/parse`    | Parse natural language shopping list into structured products |
-| `POST` | `/optimize` | Generate optimized shopping plan with route and pricing       |
-| `GET`  | `/status`   | Get optimization service status                               |
+| `POST` | `/optimize` | Generate optimised shopping plan with route and pricing       |
+| `GET`  | `/status`   | Get optimisation service status                               |
 
 **Key Features:**
 
 - Natural language processing for shopping lists
-- Multi-store route optimization
+- Multi-store route optimisation
 - Price vs. time trade-off analysis
 - Location-based store selection
 
@@ -194,10 +194,10 @@ Shopping plan storage and management system.
 
 ## 🔧 Core Features
 
-### AI-Powered Optimization
+### AI-Powered Optimisation
 
 - **Natural Language Processing**: Converts shopping lists to structured data
-- **Multi-Objective Optimization**: Balances cost, time, and convenience
+- **Multi-Objective Optimisation**: Balances cost, time, and convenience
 - **Route Planning**: Calculates optimal store visiting order
 - **Location Intelligence**: Uses geospatial data for store selection
 
