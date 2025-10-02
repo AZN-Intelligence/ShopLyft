@@ -144,7 +144,7 @@ function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <PlanLayout planData={TEMPLATE_PLAN} isLoading={false} />
+            <PlanLayout planData={planData} isLoading={false} />
           </motion.div>
         )}
       </AnimatePresence>

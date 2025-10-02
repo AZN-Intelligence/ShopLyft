@@ -422,32 +422,32 @@
     },
     {
       "retailer_product_id": "coles:carrots:1kg-0001",
-      "price": 500,
-      "unit_price": 500,
+      "price": 3,
+      "unit_price": 3,
       "unit_price_measure": "per_kg"
     },
     {
       "retailer_product_id": "aldi:carrots:1kg-0001",
-      "price": 10000,
-      "unit_price": 10000,
+      "price": 5,
+      "unit_price": 5,
       "unit_price_measure": "per_kg"
     },
     {
       "retailer_product_id": "woolworths:juice:orange-2l-0001",
-      "price": 500,
-      "unit_price": 250,
+      "price": 5,
+      "unit_price": 5,
       "unit_price_measure": "per_L"
     },
     {
       "retailer_product_id": "coles:juice:orange-2l-0001",
-      "price": 5.20,
-      "unit_price": 2.60,
+      "price": 2.2,
+      "unit_price": 2.2,
       "unit_price_measure": "per_L"
     },
     {
       "retailer_product_id": "aldi:juice:orange-2l-0001",
-      "price": 10000,
-      "unit_price": 5000,
+      "price": 7,
+      "unit_price": 7,
       "unit_price_measure": "per_L"
     }
   ]
