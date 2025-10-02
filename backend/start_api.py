@@ -9,10 +9,14 @@ Make sure to install dependencies first: pip install -r requirements.txt
 import uvicorn
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 def main():
     """Start the FastAPI server."""
     try:
+        # Load environment variables from .env file
+        load_dotenv()
+        
         # Check if we're in the right directory
         if not Path("main.py").exists():
             print("Error: main.py not found. Please run this script from the ShopLyft root directory.")
