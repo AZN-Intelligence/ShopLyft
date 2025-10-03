@@ -1263,16 +1263,409 @@ def extract_products_fallback_patterns(html_content: str) -> List[Dict[str, Any]
     
     return products
 
+async def search_coles_product_with_browser(product_name: str) -> Optional[str]:
+    """Search Coles using headless browser to access product links."""
+    try:
+        from playwright.async_api import async_playwright
+        
+        # URL encode the product name for the search
+        encoded_product = urllib.parse.quote(product_name)
+        search_url = f"https://www.coles.com.au/search/products?q={encoded_product}"
+        
+        print(f"[ShopLyft] Searching Coles with browser for: '{product_name}' -> {search_url}")
+        
+        async with async_playwright() as p:
+            # Launch browser with realistic settings
+            browser = await p.chromium.launch(
+                headless=True,
+                args=[
+                    '--no-sandbox',
+                    '--disable-blink-features=AutomationControlled',
+                    '--disable-features=VizDisplayCompositor',
+                    '--disable-web-security',
+                    '--disable-dev-shm-usage',
+                    '--disable-gpu',
+                    '--no-first-run',
+                    '--disable-default-apps',
+                    '--disable-extensions'
+                ]
+            )
+            
+            context = await browser.new_context(
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                viewport={'width': 1366, 'height': 768},
+                extra_http_headers={
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Connection': 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1',
+                    'Sec-Fetch-Dest': 'document',
+                    'Sec-Fetch-Mode': 'navigate',
+                    'Sec-Fetch-Site': 'none',
+                    'Cache-Control': 'max-age=0'
+                }
+            )
+            
+            page = await context.new_page()
+            
+            try:
+                # Navigate to search page
+                await page.goto(search_url, wait_until='networkidle', timeout=30000)
+                
+                # Wait for product links to load
+                await page.wait_for_selector('a.product__link', timeout=10000)
+                
+                # Extract product links
+                product_links = await page.evaluate("""
+                    () => {
+                        const links = [];
+                        const productLinks = document.querySelectorAll('a.product__link');
+                        
+                        productLinks.forEach(link => {
+                            if (link.href && link.href.includes('/product/')) {
+                                links.push(link.href);
+                            }
+                        });
+                        
+                        return links;
+                    }
+                """)
+                
+                print(f"[ShopLyft] Browser found {len(product_links)} product links for '{product_name}':")
+                for i, link in enumerate(product_links[:5], 1):  # Show first 5
+                    print(f"[ShopLyft]   {i}. {link}")
+                
+                if product_links:
+                    # Return the first (usually most relevant) product link
+                    return product_links[0]
+                else:
+                    print(f"[ShopLyft] No product links found for '{product_name}'")
+                    return None
+                    
+            except Exception as e:
+                print(f"[ShopLyft] Error during page interaction: {str(e)}")
+                return None
+            finally:
+                await browser.close()
+                
+    except Exception as e:
+        print(f"[ShopLyft] Error in Coles browser search: {str(e)}")
+        return None
+
+async def search_coles_product_fallback(product_name: str) -> Optional[str]:
+    """Fallback method using HTTP requests when browser is not available."""
+    try:
+        # URL encode the product name for the search
+        encoded_product = urllib.parse.quote(product_name)
+        search_url = f"https://www.coles.com.au/search/products?q={encoded_product}"
+        
+        print(f"[ShopLyft] Fallback: Searching Coles for: '{product_name}' -> {search_url}")
+        
+        async with aiohttp.ClientSession() as session:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Cache-Control': 'max-age=0'
+            }
+            
+            async with session.get(search_url, headers=headers, timeout=10) as response:
+                if response.status == 200:
+                    html_content = await response.text()
+                    return extract_coles_product_link(html_content, product_name)
+                else:
+                    print(f"[ShopLyft] HTTP request failed with status: {response.status}")
+                    return None
+                    
+    except Exception as e:
+        print(f"[ShopLyft] Error in Coles HTTP fallback: {str(e)}")
+        return None
+
+def extract_coles_product_link(html_content: str, search_term: str) -> Optional[str]:
+    """Extract product link from Coles search results HTML."""
+    try:
+        import re
+        
+        # Pattern to match Coles product links
+        # Looking for href="/product/coles-..." patterns
+        pattern = r'href="(/product/[^"]+)"'
+        matches = re.findall(pattern, html_content)
+        
+        if matches:
+            # Get the first match and convert to full URL
+            relative_url = matches[0]
+            full_url = f"https://www.coles.com.au{relative_url}"
+            print(f"[ShopLyft] Found Coles product link: {full_url}")
+            return full_url
+        else:
+            print(f"[ShopLyft] No Coles product links found in HTML")
+            return None
+            
+    except Exception as e:
+        print(f"[ShopLyft] Error extracting Coles product link: {str(e)}")
+        return None
+
+async def search_coles_product(product_name: str) -> Optional[str]:
+    """Search Coles for a product and return the first product link found."""
+    
+    # Strategy 1: Try browser method first
+    print(f"[ShopLyft] Attempting browser search for Coles product '{product_name}'")
+    result = await search_coles_product_with_browser(product_name)
+    if result:
+        return result
+    
+    # Strategy 2: Fallback to HTTP method
+    print(f"[ShopLyft] Browser method failed, trying HTTP fallback for Coles product '{product_name}'")
+    return await search_coles_product_fallback(product_name)
+
+def generate_coles_fallback_link(product_name: str) -> str:
+    """Generate a fallback Coles search URL when product search fails."""
+    encoded_product = urllib.parse.quote(product_name)
+    search_url = f"https://www.coles.com.au/search/products?q={encoded_product}"
+    print(f"[ShopLyft] Generated fallback Coles search URL for '{product_name}': {search_url}")
+    return search_url
+
+async def generate_coles_links(items: List[RouteItem]) -> List[str]:
+    """Generate actual Coles product links by searching their website."""
+    links = []
+    
+    # Create tasks for concurrent searching
+    search_tasks = []
+    for item in items:
+        task = search_coles_product(item.product_name)
+        search_tasks.append(task)
+    
+    # Execute all searches concurrently
+    search_results = await asyncio.gather(*search_tasks, return_exceptions=True)
+    
+    # Process results
+    for i, result in enumerate(search_results):
+        if isinstance(result, str) and result and result.startswith("https://"):
+            # Valid URL found from search
+            links.append(result)
+        else:
+            # Use fallback strategy
+            item = items[i]
+            fallback_link = generate_coles_fallback_link(item.product_name)
+            print(f"[ShopLyft] Using fallback link for '{item.product_name}': {fallback_link}")
+            links.append(fallback_link)
+    
+    return links
+
+async def search_aldi_product_with_browser(product_name: str) -> Optional[str]:
+    """Search ALDI using headless browser to access product links."""
+    try:
+        from playwright.async_api import async_playwright
+        
+        # URL encode the product name for the search
+        encoded_product = urllib.parse.quote(product_name)
+        search_url = f"https://www.aldi.com.au/results?q={encoded_product}"
+        
+        print(f"[ShopLyft] Searching ALDI with browser for: '{product_name}' -> {search_url}")
+        
+        async with async_playwright() as p:
+            # Launch browser with realistic settings
+            browser = await p.chromium.launch(
+                headless=True,
+                args=[
+                    '--no-sandbox',
+                    '--disable-blink-features=AutomationControlled',
+                    '--disable-features=VizDisplayCompositor',
+                    '--disable-web-security',
+                    '--disable-dev-shm-usage',
+                    '--disable-gpu',
+                    '--no-first-run',
+                    '--disable-default-apps',
+                    '--disable-extensions'
+                ]
+            )
+            
+            context = await browser.new_context(
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                viewport={'width': 1366, 'height': 768},
+                extra_http_headers={
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Connection': 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1',
+                    'Sec-Fetch-Dest': 'document',
+                    'Sec-Fetch-Mode': 'navigate',
+                    'Sec-Fetch-Site': 'none',
+                    'Cache-Control': 'max-age=0'
+                }
+            )
+            
+            page = await context.new_page()
+            
+            try:
+                # Navigate to search page
+                await page.goto(search_url, wait_until='networkidle', timeout=30000)
+                
+                # Wait for product links to load
+                await page.wait_for_selector('a.product-tile__link', timeout=10000)
+                
+                # Extract product links
+                product_links = await page.evaluate("""
+                    () => {
+                        const links = [];
+                        const productLinks = document.querySelectorAll('a.product-tile__link');
+                        
+                        productLinks.forEach(link => {
+                            if (link.href && link.href.includes('/product/')) {
+                                links.push(link.href);
+                            }
+                        });
+                        
+                        return links;
+                    }
+                """)
+                
+                print(f"[ShopLyft] Browser found {len(product_links)} product links for '{product_name}':")
+                for i, link in enumerate(product_links[:5], 1):  # Show first 5
+                    print(f"[ShopLyft]   {i}. {link}")
+                
+                if product_links:
+                    # Return the first (usually most relevant) product link
+                    return product_links[0]
+                else:
+                    print(f"[ShopLyft] No product links found for '{product_name}'")
+                    return None
+                    
+            except Exception as e:
+                print(f"[ShopLyft] Error during page interaction: {str(e)}")
+                return None
+            finally:
+                await browser.close()
+                
+    except Exception as e:
+        print(f"[ShopLyft] Error in ALDI browser search: {str(e)}")
+        return None
+
+async def search_aldi_product_fallback(product_name: str) -> Optional[str]:
+    """Fallback method using HTTP requests when browser is not available."""
+    try:
+        # URL encode the product name for the search
+        encoded_product = urllib.parse.quote(product_name)
+        search_url = f"https://www.aldi.com.au/results?q={encoded_product}"
+        
+        print(f"[ShopLyft] Fallback: Searching ALDI for: '{product_name}' -> {search_url}")
+        
+        async with aiohttp.ClientSession() as session:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Cache-Control': 'max-age=0'
+            }
+            
+            async with session.get(search_url, headers=headers, timeout=10) as response:
+                if response.status == 200:
+                    html_content = await response.text()
+                    return extract_aldi_product_link(html_content, product_name)
+                else:
+                    print(f"[ShopLyft] HTTP request failed with status: {response.status}")
+                    return None
+                    
+    except Exception as e:
+        print(f"[ShopLyft] Error in ALDI HTTP fallback: {str(e)}")
+        return None
+
+def extract_aldi_product_link(html_content: str, search_term: str) -> Optional[str]:
+    """Extract product link from ALDI search results HTML."""
+    try:
+        import re
+        
+        # Pattern to match ALDI product links
+        # Looking for href="/product/..." patterns
+        pattern = r'href="(/product/[^"]+)"'
+        matches = re.findall(pattern, html_content)
+        
+        if matches:
+            # Get the first match and convert to full URL
+            relative_url = matches[0]
+            full_url = f"https://www.aldi.com.au{relative_url}"
+            print(f"[ShopLyft] Found ALDI product link: {full_url}")
+            return full_url
+        else:
+            print(f"[ShopLyft] No ALDI product links found in HTML")
+            return None
+            
+    except Exception as e:
+        print(f"[ShopLyft] Error extracting ALDI product link: {str(e)}")
+        return None
+
+async def search_aldi_product(product_name: str) -> Optional[str]:
+    """Search ALDI for a product and return the first product link found."""
+    
+    # Strategy 1: Try browser method first
+    print(f"[ShopLyft] Attempting browser search for ALDI product '{product_name}'")
+    result = await search_aldi_product_with_browser(product_name)
+    if result:
+        return result
+    
+    # Strategy 2: Fallback to HTTP method
+    print(f"[ShopLyft] Browser method failed, trying HTTP fallback for ALDI product '{product_name}'")
+    return await search_aldi_product_fallback(product_name)
+
+def generate_aldi_fallback_link(product_name: str) -> str:
+    """Generate a fallback ALDI search URL when product search fails."""
+    encoded_product = urllib.parse.quote(product_name)
+    search_url = f"https://www.aldi.com.au/results?q={encoded_product}"
+    print(f"[ShopLyft] Generated fallback ALDI search URL for '{product_name}': {search_url}")
+    return search_url
+
+async def generate_aldi_links(items: List[RouteItem]) -> List[str]:
+    """Generate actual ALDI product links by searching their website."""
+    links = []
+    
+    # Create tasks for concurrent searching
+    search_tasks = []
+    for item in items:
+        task = search_aldi_product(item.product_name)
+        search_tasks.append(task)
+    
+    # Execute all searches concurrently
+    search_results = await asyncio.gather(*search_tasks, return_exceptions=True)
+    
+    # Process results
+    for i, result in enumerate(search_results):
+        if isinstance(result, str) and result and result.startswith("https://"):
+            # Valid URL found from search
+            links.append(result)
+        else:
+            # Use fallback strategy
+            item = items[i]
+            fallback_link = generate_aldi_fallback_link(item.product_name)
+            print(f"[ShopLyft] Using fallback link for '{item.product_name}': {fallback_link}")
+            links.append(fallback_link)
+    
+    return links
+
 async def generate_product_links_async(retailer_id: str, items: List[RouteItem]) -> List[str]:
     """Generate product links for a retailer - async version."""
     if retailer_id == "woolworths":
         return await generate_woolworths_links(items)
+    elif retailer_id == "coles":
+        return await generate_coles_links(items)
+    elif retailer_id == "aldi":
+        return await generate_aldi_links(items)
     else:
         # Fallback for other retailers (placeholder implementation)
-        base_urls = {
-            "coles": "https://www.coles.com.au/product/",
-            "aldi": "https://www.aldi.com.au/product/"
-        }
+        base_urls = {}
         
         links = []
         base_url = base_urls.get(retailer_id, "")
